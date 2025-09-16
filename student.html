@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Study Notes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin: 20px 0 30px;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 0 10px;
+    }
+    
+    .day-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+    
+    h2 {
+      color: #34495e;
+      border-left: 5px solid #667eea;
+      padding-left: 12px;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+    
+    h3 {
+      color: #2c3e50;
+      margin: 20px 0 12px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #eee;
+      font-size: 1.3rem;
+    }
+    
+    h4 {
+      color: #3f51b5;
+      margin: 18px 0 10px;
+      font-size: 1.1rem;
+    }
+    
+    ul, ol {
+      margin: 12px 0;
+      padding-left: 25px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    .key-term {
+      background: #e3f2fd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    
+    .key-point {
+      background: #fff3e0;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid #ff9800;
+    }
+    
+    .shortcut {
+      background: #e8f5e9;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      margin: 5px 0;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+    
+    .note-box {
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 1px dashed #667eea;
+    }
+    
+    .alignment-demo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 15px;
+    }
+    
+    .alignment-item {
+      flex: 1 1 300px;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      min-width: 0;
+    }
+    
+    .right-align {
+      text-align: right;
+      color: #4caf50;
+    }
+    
+    .left-align {
+      text-align: left;
+      color: #2196f3;
+    }
+    
+    .memory-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 15px;
+    }
+    
+    .memory-type {
+      flex: 1 1 300px;
+      padding: 15px;
+      border-radius: 8px;
+      color: white;
+      min-width: 0;
+    }
+    
+    .ram {
+      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    }
+    
+    .rom {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+    
+    .example-box {
+      background: #f9f9f9;
+      border-left: 4px solid #9c27b0;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    
+    .sorting-demo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 15px;
+    }
+    
+    .sorting-item {
+      flex: 1 1 300px;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      min-width: 0;
+    }
+    
+    .date-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      min-width: 300px;
+    }
+    
+    .date-table th, .date-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    .date-table th {
+      background-color: #f2f2f2;
+    }
+    
+    /* Navigation for mobile */
+    .nav-container {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      margin-bottom: 20px;
+    }
+    
+    .nav-toggle {
+      display: none;
+    }
+    
+    .nav-button {
+      display: none;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    .nav-button:active {
+      transform: translateY(2px);
+    }
+    
+    .day-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .day-nav a {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    
+    .day-nav a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .day-nav a:active {
+      transform: translateY(0);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+        font-size: 15px;
+      }
+      
+      .container {
+        padding: 15px;
+        border-radius: 12px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin: 15px 0 25px;
+      }
+      
+      h2 {
+        font-size: 1.4rem;
+      }
+      
+      h3 {
+        font-size: 1.2rem;
+      }
+      
+      .day-section {
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      
+      .alignment-demo, .memory-section, .sorting-demo {
+        flex-direction: column;
+      }
+      
+      .alignment-item, .memory-type, .sorting-item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      
+      .day-nav {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .nav-button {
+        display: block;
+      }
+      
+      .nav-toggle:checked ~ .day-nav {
+        display: flex;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+        font-size: 14px;
+      }
+      
+      .container {
+        padding: 12px;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      h3 {
+        font-size: 1.1rem;
+      }
+      
+      .day-section {
+        padding: 12px;
+      }
+      
+      ul, ol {
+        padding-left: 20px;
+      }
+      
+      .key-point, .note-box {
+        padding: 10px;
+      }
+      
+      .shortcut {
+        padding: 5px 8px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Improve touch targets for mobile */
+    @media (pointer: coarse) {
+      .day-nav a, .nav-button {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      li {
+        margin-bottom: 12px;
+      }
+    }
+    
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      
+      .container {
+        box-shadow: none;
+        background: white;
+        padding: 0;
+      }
+      
+      .nav-container {
+        display: none;
+      }
+      
+      .day-section {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Excel Study Notes</h1>
+    
+
+
+    <div class="day-section" id="day1">
+      <h2>DAY 1: Excel Fundamentals</h2>
+      
+      <h3>What is Data, Dataset, and Database?</h3>
+      <ul>
+        <li><span class="key-term">Data</span>: Individual information that we collect and record (e.g., "Ram" (name), "15" (age), "$1" (price))</li>
+        <li><span class="key-term">Dataset</span>: Collection of related data pieces (e.g., student list with names, ages, grades)</li>
+        <li><span class="key-term">Database</span>: Organized collection of datasets with rules to keep data clean</li>
+      </ul>
+      
+      <h3>Data Types and Alignment</h3>
+      <div class="alignment-demo">
+        <div class="alignment-item">
+          <h4>Numbers & Dates (Right-Aligned)</h4>
+          <p class="right-align">25</p>
+          <p class="right-align">3.14</p>
+          <p class="right-align">2023-10-15</p>
+        </div>
+        <div class="alignment-item">
+          <h4>Text (Left-Aligned)</h4>
+          <p class="left-align">John Smith</p>
+          <p class="left-align">Excel Notes</p>
+          <p class="left-align">Introduction to Data</p>
+        </div>
+      </div>
+      
+      <h3>Excel Interface Components</h3>
+      <ul>
+        <li><span class="key-term">Quick Access Toolbar</span>: Customizable toolbar for frequently used commands</li>
+        <li><span class="key-term">Ribbon Tabs</span>: Main menu categories (Home, Insert, Formulas, etc.)</li>
+        <li><span class="key-term">Ribbon Groups</span>: Related commands grouped within each tab</li>
+        <li><span class="key-term">Formula Bar</span>: Where you create or edit formulas and cell contents</li>
+        <li><span class="key-term">Name Box</span>: Shows the address of the selected cell</li>
+        <li><span class="key-term">Search Bar</span>: Helps find tools and commands quickly</li>
+        <li><span class="key-term">Function Tool Icon</span>: Visual way to create functions</li>
+        <li><span class="key-term">Worksheet</span>: The grid where you enter and work with data</li>
+      </ul>
+      
+      <h3>About Excel</h3>
+      <ul>
+        <li><span class="key-term">What is Excel?</span>: A spreadsheet program for organizing, analyzing, and storing data</li>
+        <li><span class="key-term">Why use Excel?</span>: For calculations, data analysis, visualization, and reporting</li>
+        <li><span class="key-term">Advanced Excel</span>: Includes complex formulas, pivot tables, macros, and data modeling</li>
+      </ul>
+      
+      <h3>Sheet Naming Conventions</h3>
+      <div class="note-box">
+        <p><strong>Use singular names</strong> for unique entities (e.g., "Student" for a class table with unique students)</p>
+        <p><strong>Use plural names</strong> for multiple entries (e.g., "Registrations" where students can register for multiple events)</p>
+      </div>
+      
+      <h3>Lexicographical Sorting</h3>
+      <p>Lexicographical sorting, also known as dictionary order or alphanumerical order, arranges words or sequences of elements in the same way you would find words in a dictionary.</p>
+      
+      <h4>How It Works (ascending ex:)</h4>
+      <p>The comparison process follows these simple rules:</p>
+      <ol>
+        <li>Compare the first elements of the two sequences</li>
+        <li>If the first elements are different, the sequence with the "smaller" element comes first</li>
+        <li>If the first elements are the same, move to the second elements and compare them</li>
+        <li>Repeat this process until a difference is found</li>
+        <li>If one sequence runs out of elements while the other still has elements, the shorter sequence is considered "smaller"</li>
+      </ol>
+      
+      <div class="example-box">
+        <h4>Example with Words</h4>
+        <p>Let's sort the following list of words lexicographically: ["apple", "ape", "apply", "apt"]</p>
+        <p><strong>Compare "apple" and "ape":</strong></p>
+        <ul>
+          <li>a vs a → Same</li>
+          <li>p vs p → Same</li>
+          <li>p vs e → e comes before p → "ape" comes before "apple"</li>
+        </ul>
+        
+        <p><strong>Compare "apple" and "apply":</strong></p>
+        <ul>
+          <li>a vs a → Same</li>
+          <li>p vs p → Same</li>
+          <li>p vs p → Same</li>
+          <li>l vs l → Same</li>
+          <li>e vs y → e comes before y → "apple" comes before "apply"</li>
+        </ul>
+      </div>
+      
+      <h4>Why Text Sorting is Slower Than Integer Sorting</h4>
+      <p>Text sorting is generally slower than integer sorting because:</p>
+      <ul>
+        <li>Text comparison requires character-by-character analysis</li>
+        <li>Text strings can have variable lengths</li>
+        <li>Text sorting may need to consider case sensitivity and special characters</li>
+        <li>Integer comparison is a single operation per number</li>
+      </ul>
+      
+      <h3>Date Storage in Excel</h3>
+      <p>In Excel, dates are stored as serial numbers representing the number of days since January 1, 1900.</p>
+      
+      <div class="example-box">
+        <table class="date-table">
+          <tr>
+            <th>Date (What You See)</th>
+            <th>Serial Number (What Excel Sees)</th>
+          </tr>
+          <tr>
+            <td>January 1, 1900</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>January 2, 1900</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>September 16, 2025</td>
+            <td>45916</td>
+          </tr>
+        </table>
+      </div>
+      
+      <p>This allows Excel to perform chronological sorting by simply comparing the serial numbers.</p>
+      
+      <h3>Excel Sorting Algorithms (just learn names only)</h3>
+      <p>Excel uses efficient sorting algorithms like:</p>
+      
+      <div class="sorting-demo">
+        <div class="sorting-item">
+          <h4>Quick Sort</h4>
+          <p>Efficient for most datasets, works by selecting a 'pivot' element and partitioning the array around it</p>
+        </div>
+        <div class="sorting-item">
+          <h4>Merge Sort</h4>
+          <p>Stable algorithm good for large datasets, works by dividing the array into halves, sorting them, and then merging</p>
+        </div>
+      </div>
+      
+      <p>These algorithms are efficient for both integer and text sorting, with Merge Sort being particularly stable for large data sorting.</p>
+    </div>
+
+    <div class="day-section" id="day2">
+      <h2>DAY 2: Data Operations & Shortcuts</h2>
+      
+      <h3>Sorting Data</h3>
+      <ul>
+        <li><span class="key-term">Single-level sorting</span>: Organizing data based on one column</li>
+        <li><span class="key-term">Multi-level sorting</span>: Organizing data by multiple columns (e.g., first by department, then by marks)</li>
+      </ul>
+      
+      <h3>How to Sort</h3>
+      <ul>
+        <li>Use the Sort tool in the Data ribbon tab</li>
+        <li>Choose column name and sorting order (A-Z or Z-A)</li>
+        <li>Or search for "Sort" in the search bar</li>
+      </ul>
+      
+      <h3>SORT Formula</h3>
+      <div class="note-box">
+        <p><strong>=SORT(array, [sort_index], [sort_order], [by_col])</strong></p>
+        <ul>
+          <li><span class="key-term">array</span>: The data table you want to be sorted</li>
+          <li><span class="key-term">sort_index</span>: The column index to sort by (1 for first column)</li>
+          <li><span class="key-term">sort_order</span>: 1 for ascending, -1 for descending</li>
+        </ul>
+      </div>
+      
+      <h3>SORTBY Formula (Multi-level Sorting)</h3>
+      <div class="note-box">
+        <p><strong>=SORTBY(array, by_array1, [sort_order1], [by_array2], [sort_order2], ...)</strong></p>
+        <ul>
+          <li><span class="key-term">array</span>: The data table you want to sort</li>
+          <li><span class="key-term">by_array1</span>: The first column to sort by (instead of index, you use the actual column)</li>
+          <li><span class="key-term">sort_order1</span>: 1 for ascending, -1 for descending for the first sort</li>
+          <li><span class="key-term">by_array2</span>: The second column to sort by</li>
+          <li><span class="key-term">sort_order2</span>: 1 for ascending, -1 for descending for the second sort</li>
+        </ul>
+      </div>
+      
+      <h3>Computer Memory</h3>
+      <div class="memory-section">
+        <div class="memory-type ram">
+          <h4>RAM (Temporary Memory)</h4>
+          <p>Excel uses RAM for all operations</p>
+          <p>Undo and Redo functions use RAM</p>
+          <p><strong>Volatile</strong> - data lost when Excel closes without saving</p>
+        </div>
+        <div class="memory-type rom">
+          <h4>ROM (Permanent Storage)</h4>
+          <p>Files are saved to ROM (hard drive/SSD)</p>
+          <p>Data persists even after computer is turned off</p>
+          <p><strong>Non-volatile</strong> - permanent storage</p>
+        </div>
+      </div>
+      
+      <div class="key-point">
+        <p>💡 <strong>Always save your work!</strong> If you don't save before closing Excel, all your work will be lost because RAM only stores data temporarily.</p>
+      </div>
+      
+      <h3>Essential Keyboard Shortcuts</h3>
+      <ul>
+        <li><span class="shortcut">Ctrl + X</span> - Cut (removes original data)</li>
+        <li><span class="shortcut">Ctrl + C</span> - Copy</li>
+        <li><span class="shortcut">Ctrl + V</span> - Paste</li>
+        <li><span class="shortcut">Ctrl + Shift + +</span> - Insert row/column before selected one</li>
+        <li><span class="shortcut">Ctrl + -</span> - Remove selected cells/rows/columns</li>
+      </ul>
+      
+      <h3>Selection Shortcuts</h3>
+      <ul>
+        <li><span class="shortcut">Ctrl + Shift + Down Arrow</span> - Select range of cells in column with data (if selected the first column cell in the data)</li>
+        <li><span class="shortcut">Ctrl + Shift + Right Arrow</span> - Select range of cells in row with data (if selected the first row cell in the data)</li>
+        <li><span class="shortcut">Ctrl + Shift + Down Arrow + Right Arrow</span> - Select the whole data range if the cell you selected is the first cell in column and first row cell in the row</li>
+      </ul>
+      
+      <div class="key-point">
+        <p>💡 <strong>Pro Tip:</strong> Use these selection shortcuts to quickly highlight large datasets before performing operations like sorting or formatting.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple JavaScript to improve mobile experience
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 20,
+              behavior: 'smooth'
+            });
+            
+            // Close the navigation if open on mobile
+            const navToggle = document.getElementById('navToggle');
+            if (navToggle.checked) {
+              navToggle.checked = false;
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
