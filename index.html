@@ -1,648 +1,986 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Excel Study Notes</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffffff 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-      margin: 20px 0 30px;
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      padding: 0 10px;
-    }
-    
-    .day-section {
-      margin-bottom: 40px;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    }
-    
-    h2 {
-      color: #34495e;
-      border-left: 5px solid #667eea;
-      padding-left: 12px;
-      margin-bottom: 20px;
-      font-size: 1.6rem;
-    }
-    
-    h3 {
-      color: #2c3e50;
-      margin: 20px 0 12px;
-      padding-bottom: 5px;
-      border-bottom: 2px solid #eee;
-      font-size: 1.3rem;
-    }
-    
-    h4 {
-      color: #3f51b5;
-      margin: 18px 0 10px;
-      font-size: 1.1rem;
-    }
-    
-    ul, ol {
-      margin: 12px 0;
-      padding-left: 25px;
-    }
-    
-    li {
-      margin-bottom: 10px;
-    }
-    
-    .key-term {
-      background: #e3f2fd;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-    
-    .key-point {
-      background: #fff3e0;
-      padding: 12px;
-      border-radius: 8px;
-      margin: 15px 0;
-      border-left: 4px solid #ff9800;
-    }
-    
-    .shortcut {
-      background: #e8f5e9;
-      padding: 6px 10px;
-      border-radius: 5px;
-      font-family: monospace;
-      margin: 5px 0;
-      display: inline-block;
-      font-size: 0.9rem;
-    }
-    
-    .note-box {
-      background: #f5f5f5;
-      padding: 12px;
-      border-radius: 8px;
-      margin: 15px 0;
-      border: 1px dashed #667eea;
-    }
-    
-    .alignment-demo {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 20px 0;
-      gap: 15px;
-    }
-    
-    .alignment-item {
-      flex: 1 1 300px;
-      padding: 12px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-      min-width: 0;
-    }
-    
-    .right-align {
-      text-align: right;
-      color: #4caf50;
-    }
-    
-    .left-align {
-      text-align: left;
-      color: #2196f3;
-    }
-    
-    .memory-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 20px 0;
-      gap: 15px;
-    }
-    
-    .memory-type {
-      flex: 1 1 300px;
-      padding: 15px;
-      border-radius: 8px;
-      color: white;
-      min-width: 0;
-    }
-    
-    .ram {
-      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-    }
-    
-    .rom {
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-    }
-    
-    .example-box {
-      background: #f9f9f9;
-      border-left: 4px solid #9c27b0;
-      padding: 12px;
-      margin: 15px 0;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
-    
-    .sorting-demo {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 20px 0;
-      gap: 15px;
-    }
-    
-    .sorting-item {
-      flex: 1 1 300px;
-      padding: 12px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-      min-width: 0;
-    }
-    
-    .date-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-      min-width: 300px;
-    }
-    
-    .date-table th, .date-table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    
-    .date-table th {
-      background-color: #f2f2f2;
-    }
-    
-    /* Navigation for mobile */
-    .nav-container {
-      position: sticky;
-      top: 10px;
-      z-index: 100;
-      margin-bottom: 20px;
-    }
-    
-    .nav-toggle {
-      display: none;
-    }
-    
-    .nav-button {
-      display: none;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 12px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    }
-    
-    .nav-button:active {
-      transform: translateY(2px);
-    }
-    
-    .day-nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    
-    .day-nav a {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-    
-    .day-nav a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    
-    .day-nav a:active {
-      transform: translateY(0);
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      body {
-        padding: 15px;
-        font-size: 15px;
-      }
-      
-      .container {
-        padding: 15px;
-        border-radius: 12px;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-        margin: 15px 0 25px;
-      }
-      
-      h2 {
-        font-size: 1.4rem;
-      }
-      
-      h3 {
-        font-size: 1.2rem;
-      }
-      
-      .day-section {
-        padding: 15px;
-        margin-bottom: 30px;
-      }
-      
-      .alignment-demo, .memory-section, .sorting-demo {
-        flex-direction: column;
-      }
-      
-      .alignment-item, .memory-type, .sorting-item {
-        width: 100%;
-        margin-bottom: 15px;
-      }
-      
-      .day-nav {
-        display: none;
-        flex-direction: column;
-        gap: 8px;
-      }
-      
-      .nav-button {
-        display: block;
-      }
-      
-      .nav-toggle:checked ~ .day-nav {
-        display: flex;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-        font-size: 14px;
-      }
-      
-      .container {
-        padding: 12px;
-      }
-      
-      h1 {
-        font-size: 1.6rem;
-      }
-      
-      h2 {
-        font-size: 1.3rem;
-      }
-      
-      h3 {
-        font-size: 1.1rem;
-      }
-      
-      .day-section {
-        padding: 12px;
-      }
-      
-      ul, ol {
-        padding-left: 20px;
-      }
-      
-      .key-point, .note-box {
-        padding: 10px;
-      }
-      
-      .shortcut {
-        padding: 5px 8px;
-        font-size: 0.85rem;
-      }
-    }
-    
-    /* Improve touch targets for mobile */
-    @media (pointer: coarse) {
-      .day-nav a, .nav-button {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      li {
-        margin-bottom: 12px;
-      }
-    }
-    
-    /* Print styles */
-    @media print {
-      body {
-        background: white;
-        padding: 0;
-      }
-      
-      .container {
-        box-shadow: none;
-        background: white;
-        padding: 0;
-      }
-      
-      .nav-container {
-        display: none;
-      }
-      
-      .day-section {
-        box-shadow: none;
-        page-break-inside: avoid;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Excel Study Notes</h1>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Excel Training - Complete Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
+        .excel-cell {
+            transition: all 0.3s ease;
+        }
 
-    <div class="day-section" id="day1">
-      <h2>DAY 1: Excel Fundamentals</h2>
-      
-      <h3>What is Data, Dataset, and Database?</h3>
-      <ul>
-        <li><span class="key-term">Data</span>: Individual information that we collect and record (e.g., "Ram" (name), "15" (age), "$1" (price))</li>
-        <li><span class="key-term">Dataset</span>: Collection of related data pieces (e.g., student list with names, ages, grades)</li>
-        <li><span class="key-term">Database</span>: Organized collection of datasets with rules to keep data clean</li>
-      </ul>
-      
-      <h3>Data Types and Alignment</h3>
-      <div class="alignment-demo">
-        <div class="alignment-item">
-          <h4>Numbers & Dates (Right-Aligned)</h4>
-          <p class="right-align">25</p>
-          <p class="right-align">3.14</p>
-          <p class="right-align">2023-10-15</p>
-        </div>
-        <div class="alignment-item">
-          <h4>Text (Left-Aligned)</h4>
-          <p class="left-align">John Smith</p>
-          <p class="left-align">Excel Notes</p>
-          <p class="left-align">Introduction to Data</p>
-        </div>
-      </div>
-      
-      <h3>Excel Interface Components</h3>
-      <ul>
-        <li><span class="key-term">Quick Access Toolbar</span>: Customizable toolbar for frequently used commands</li>
-        <li><span class="key-term">Ribbon Tabs</span>: Main menu categories (Home, Insert, Formulas, etc.)</li>
-        <li><span class="key-term">Ribbon Groups</span>: Related commands grouped within each tab</li>
-        <li><span class="key-term">Formula Bar</span>: Where you create or edit formulas and cell contents</li>
-        <li><span class="key-term">Name Box</span>: Shows the address of the selected cell</li>
-        <li><span class="key-term">Search Bar</span>: Helps find tools and commands quickly</li>
-        <li><span class="key-term">Function Tool Icon</span>: Visual way to create functions</li>
-        <li><span class="key-term">Worksheet</span>: The grid where you enter and work with data</li>
-      </ul>
-      
-      <h3>About Excel</h3>
-      <ul>
-        <li><span class="key-term">What is Excel?</span>: A spreadsheet program for organizing, analyzing, and storing data</li>
-        <li><span class="key-term">Why use Excel?</span>: For calculations, data analysis, visualization, and reporting</li>
-        <li><span class="key-term">Advanced Excel</span>: Includes complex formulas, pivot tables, macros, and data modeling</li>
-      </ul>
-      
-      <h3>Sheet Naming Conventions</h3>
-      <div class="note-box">
-        <p><strong>Use singular names</strong> for unique entities (e.g., "Student" for a class table with unique students)</p>
-        <p><strong>Use plural names</strong> for multiple entries (e.g., "Registrations" where students can register for multiple events)</p>
-      </div>
-      
-      <h3>Lexicographical Sorting</h3>
-      <p>Lexicographical sorting, also known as dictionary order or alphanumerical order, arranges words or sequences of elements in the same way you would find words in a dictionary.</p>
-      
-      <h4>How It Works (ascending ex:)</h4>
-      <p>The comparison process follows these simple rules:</p>
-      <ol>
-        <li>Compare the first elements of the two sequences</li>
-        <li>If the first elements are different, the sequence with the "smaller" element comes first</li>
-        <li>If the first elements are the same, move to the second elements and compare them</li>
-        <li>Repeat this process until a difference is found</li>
-        <li>If one sequence runs out of elements while the other still has elements, the shorter sequence is considered "smaller"</li>
-      </ol>
-      
-      <div class="example-box">
-        <h4>Example with Words</h4>
-        <p>Let's sort the following list of words lexicographically: ["apple", "ape", "apply", "apt"]</p>
-        <p><strong>Compare "apple" and "ape":</strong></p>
-        <ul>
-          <li>a vs a → Same</li>
-          <li>p vs p → Same</li>
-          <li>p vs e → e comes before p → "ape" comes before "apple"</li>
-        </ul>
-        
-        <p><strong>Compare "apple" and "apply":</strong></p>
-        <ul>
-          <li>a vs a → Same</li>
-          <li>p vs p → Same</li>
-          <li>p vs p → Same</li>
-          <li>l vs l → Same</li>
-          <li>e vs y → e comes before y → "apple" comes before "apply"</li>
-        </ul>
-      </div>
-      
-      <h4>Why Text Sorting is Slower Than Integer Sorting</h4>
-      <p>Text sorting is generally slower than integer sorting because:</p>
-      <ul>
-        <li>Text comparison requires character-by-character analysis</li>
-        <li>Text strings can have variable lengths</li>
-        <li>Text sorting may need to consider case sensitivity and special characters</li>
-        <li>Integer comparison is a single operation per number</li>
-      </ul>
-      
-      <h3>Date Storage in Excel</h3>
-      <p>In Excel, dates are stored as serial numbers representing the number of days since January 1, 1900.</p>
-      
-      <div class="example-box">
-        <table class="date-table">
-          <tr>
-            <th>Date (What You See)</th>
-            <th>Serial Number (What Excel Sees)</th>
-          </tr>
-          <tr>
-            <td>January 1, 1900</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>January 2, 1900</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>September 16, 2025</td>
-            <td>45916</td>
-          </tr>
-        </table>
-      </div>
-      
-      <p>This allows Excel to perform chronological sorting by simply comparing the serial numbers.</p>
-      
-      <h3>Excel Sorting Algorithms (just learn names only)</h3>
-      <p>Excel uses efficient sorting algorithms like:</p>
-      
-      <div class="sorting-demo">
-        <div class="sorting-item">
-          <h4>Quick Sort</h4>
-          <p>Efficient for most datasets, works by selecting a 'pivot' element and partitioning the array around it</p>
-        </div>
-        <div class="sorting-item">
-          <h4>Merge Sort</h4>
-          <p>Stable algorithm good for large datasets, works by dividing the array into halves, sorting them, and then merging</p>
-        </div>
-      </div>
-      
-      <p>These algorithms are efficient for both integer and text sorting, with Merge Sort being particularly stable for large data sorting.</p>
-    </div>
+        .excel-cell.selected {
+            animation: pulse 0.5s;
+        }
 
-    <div class="day-section" id="day2">
-      <h2>DAY 2: Data Operations & Shortcuts</h2>
-      
-      <h3>Sorting Data</h3>
-      <ul>
-        <li><span class="key-term">Single-level sorting</span>: Organizing data based on one column</li>
-        <li><span class="key-term">Multi-level sorting</span>: Organizing data by multiple columns (e.g., first by department, then by marks)</li>
-      </ul>
-      
-      <h3>How to Sort</h3>
-      <ul>
-        <li>Use the Sort tool in the Data ribbon tab</li>
-        <li>Choose column name and sorting order (A-Z or Z-A)</li>
-        <li>Or search for "Sort" in the search bar</li>
-      </ul>
-      
-      <h3>SORT Formula</h3>
-      <div class="note-box">
-        <p><strong>=SORT(array, [sort_index], [sort_order], [by_col])</strong></p>
-        <ul>
-          <li><span class="key-term">array</span>: The data table you want to be sorted</li>
-          <li><span class="key-term">sort_index</span>: The column index to sort by (1 for first column)</li>
-          <li><span class="key-term">sort_order</span>: 1 for ascending, -1 for descending</li>
-        </ul>
-      </div>
-      
-      <h3>SORTBY Formula (Multi-level Sorting)</h3>
-      <div class="note-box">
-        <p><strong>=SORTBY(array, by_array1, [sort_order1], [by_array2], [sort_order2], ...)</strong></p>
-        <ul>
-          <li><span class="key-term">array</span>: The data table you want to sort</li>
-          <li><span class="key-term">by_array1</span>: The first column to sort by (instead of index, you use the actual column)</li>
-          <li><span class="key-term">sort_order1</span>: 1 for ascending, -1 for descending for the first sort</li>
-          <li><span class="key-term">by_array2</span>: The second column to sort by</li>
-          <li><span class="key-term">sort_order2</span>: 1 for ascending, -1 for descending for the second sort</li>
-        </ul>
-      </div>
-      
-      <h3>Computer Memory</h3>
-      <div class="memory-section">
-        <div class="memory-type ram">
-          <h4>RAM (Temporary Memory)</h4>
-          <p>Excel uses RAM for all operations</p>
-          <p>Undo and Redo functions use RAM</p>
-          <p><strong>Volatile</strong> - data lost when Excel closes without saving</p>
-        </div>
-        <div class="memory-type rom">
-          <h4>ROM (Permanent Storage)</h4>
-          <p>Files are saved to ROM (hard drive/SSD)</p>
-          <p>Data persists even after computer is turned off</p>
-          <p><strong>Non-volatile</strong> - permanent storage</p>
-        </div>
-      </div>
-      
-      <div class="key-point">
-        <p>💡 <strong>Always save your work!</strong> If you don't save before closing Excel, all your work will be lost because RAM only stores data temporarily.</p>
-      </div>
-      
-      <h3>Essential Keyboard Shortcuts</h3>
-      <ul>
-        <li><span class="shortcut">Ctrl + X</span> - Cut (removes original data)</li>
-        <li><span class="shortcut">Ctrl + C</span> - Copy</li>
-        <li><span class="shortcut">Ctrl + V</span> - Paste</li>
-        <li><span class="shortcut">Ctrl + Shift + +</span> - Insert row/column before selected one</li>
-        <li><span class="shortcut">Ctrl + -</span> - Remove selected cells/rows/columns</li>
-      </ul>
-      
-      <h3>Selection Shortcuts</h3>
-      <ul>
-        <li><span class="shortcut">Ctrl + Shift + Down Arrow</span> - Select range of cells in column with data (if selected the first column cell in the data)</li>
-        <li><span class="shortcut">Ctrl + Shift + Right Arrow</span> - Select range of cells in row with data (if selected the first row cell in the data)</li>
-        <li><span class="shortcut">Ctrl + Shift + Down Arrow + Right Arrow</span> - Select the whole data range if the cell you selected is the first cell in column and first row cell in the row</li>
-      </ul>
-      
-      <div class="key-point">
-        <p>💡 <strong>Pro Tip:</strong> Use these selection shortcuts to quickly highlight large datasets before performing operations like sorting or formatting.</p>
-      </div>
-    </div>
-  </div>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
 
-  <script>
-    // Simple JavaScript to improve mobile experience
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 20,
-              behavior: 'smooth'
-            });
-            
-            // Close the navigation if open on mobile
-            const navToggle = document.getElementById('navToggle');
-            if (navToggle.checked) {
-              navToggle.checked = false;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
-          }
-        });
-      });
-    });
-  </script>
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #dc2626;
+            font-size: 0.9em;
+        }
+
+        /* Mobile responsive tables */
+        @media (max-width: 640px) {
+            .excel-table {
+                font-size: 0.75rem;
+            }
+            .excel-table th,
+            .excel-table td {
+                padding: 0.25rem !important;
+                min-width: 60px !important;
+            }
+        }
+
+        /* Smooth transitions for highlighting */
+        .excel-table td {
+            transition: all 0.3s ease;
+        }
+
+        .ring-4 {
+            box-shadow: 0 0 0 4px;
+        }
+
+        .ring-red-500 {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.5);
+        }
+
+        .ring-orange-500 {
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.5);
+        }
+
+        .ring-blue-500 {
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 min-h-screen">
+
+    <!-- Header -->
+    <div class="w-full bg-white shadow-lg">
+        <div class="p-4 sm:p-6 md:p-8">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-green-700 mb-2 text-center">Excel Training Course</h1>
+            <p class="text-sm sm:text-lg md:text-xl text-gray-600 text-center">Master Excel from Basics to Advanced</p>
+        </div>
+    </div>
+
+    <!-- Section 1: What is Excel -->
+    <section class="w-full bg-gradient-to-r from-green-50 to-emerald-50 p-4 sm:p-6 md:p-8 border-l-4 border-green-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-4 sm:mb-6 flex items-center flex-wrap">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span>What is Microsoft Excel?</span>
+        </h2>
+        <p class="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6">
+            Microsoft Excel is a powerful <span class="font-semibold text-green-700">spreadsheet application</span> developed by Microsoft.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-green-700 mb-1 sm:mb-2 text-sm sm:text-base">📊 Data Organization</h3>
+                <p class="text-gray-600 text-xs sm:text-sm">Store and organize data in rows and columns</p>
+            </div>
+            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-green-700 mb-1 sm:mb-2 text-sm sm:text-base">🧮 Calculations</h3>
+                <p class="text-gray-600 text-xs sm:text-sm">Perform mathematical calculations automatically</p>
+            </div>
+            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-green-700 mb-1 sm:mb-2 text-sm sm:text-base">📈 Data Analysis</h3>
+                <p class="text-gray-600 text-xs sm:text-sm">Analyze large amounts of data quickly</p>
+            </div>
+            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-green-700 mb-1 sm:mb-2 text-sm sm:text-base">📉 Visualization</h3>
+                <p class="text-gray-600 text-xs sm:text-sm">Create charts and graphs to visualize data</p>
+            </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 sm:p-6 rounded-lg">
+            <h3 class="text-lg sm:text-xl font-bold text-yellow-800 mb-3 sm:mb-4 flex items-center flex-wrap">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+                <span>Why is Excel Important?</span>
+            </h3>
+            <ul class="space-y-2 text-yellow-900 text-sm sm:text-base">
+                <li class="flex items-start"><span class="text-yellow-600 mr-2 flex-shrink-0">✓</span><span><strong>Universal Business Tool</strong> - Used in virtually every industry</span></li>
+                <li class="flex items-start"><span class="text-yellow-600 mr-2 flex-shrink-0">✓</span><span><strong>Career Essential</strong> - Required skill for most office jobs</span></li>
+                <li class="flex items-start"><span class="text-yellow-600 mr-2 flex-shrink-0">✓</span><span><strong>Productivity Booster</strong> - Automates calculations</span></li>
+                <li class="flex items-start"><span class="text-yellow-600 mr-2 flex-shrink-0">✓</span><span><strong>Decision Making</strong> - Analyze data for informed decisions</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 2: How to Open Excel -->
+    <section class="w-full bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 md:p-8 border-l-4 border-blue-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-blue-800 mb-4 sm:mb-6 flex items-center flex-wrap">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <span>How to Open Excel</span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md">
+                <div class="flex items-center mb-3 sm:mb-4">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-3 sm:mr-4 flex-shrink-0 text-sm sm:text-base">1</div>
+                    <h3 class="text-base sm:text-lg font-semibold text-blue-900">From Start Menu</h3>
+                </div>
+                <p class="text-gray-700 text-sm sm:text-base">Click <strong>Start</strong> → Type <strong>"Excel"</strong> → Click <strong>Microsoft Excel</strong></p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md">
+                <div class="flex items-center mb-3 sm:mb-4">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-3 sm:mr-4 flex-shrink-0 text-sm sm:text-base">2</div>
+                    <h3 class="text-base sm:text-lg font-semibold text-blue-900">From Desktop</h3>
+                </div>
+                <p class="text-gray-700 text-sm sm:text-base">Double-click the <strong>Excel icon</strong> on your desktop</p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md">
+                <div class="flex items-center mb-3 sm:mb-4">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-3 sm:mr-4 flex-shrink-0 text-sm sm:text-base">3</div>
+                    <h3 class="text-base sm:text-lg font-semibold text-blue-900">From Taskbar</h3>
+                </div>
+                <p class="text-gray-700 text-sm sm:text-base">Click the Excel icon on your <strong>taskbar</strong> (if pinned)</p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md">
+                <div class="flex items-center mb-3 sm:mb-4">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-3 sm:mr-4 flex-shrink-0 text-sm sm:text-base">4</div>
+                    <h3 class="text-base sm:text-lg font-semibold text-blue-900">From File Explorer</h3>
+                </div>
+                <p class="text-gray-700 text-sm sm:text-base">Right-click → <strong>New</strong> → <strong>Microsoft Excel Worksheet</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Excel Interface -->
+    <section class="w-full bg-gradient-to-r from-purple-50 to-pink-50 p-4 sm:p-6 md:p-8 border-l-4 border-purple-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-purple-800 mb-4 sm:mb-6 flex items-center flex-wrap">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <span>Excel Interface Components</span>
+        </h2>
+
+        <!-- 1. Quick Access Toolbar -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-purple-200">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">1</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-purple-900">Quick Access Toolbar</h3>
+            </div>
+            <img src="quickaccesstoolbar.png" alt="Quick Access Toolbar" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-purple-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Location:</strong> Top-left corner</p>
+                <p class="text-gray-700 mb-3 text-sm sm:text-base"><strong>Purpose:</strong> Quick access to frequently used commands</p>
+                <div class="mt-3 sm:mt-4">
+                    <h4 class="font-bold text-purple-800 mb-2 text-sm sm:text-base">Key Features:</h4>
+                    <ul class="space-y-1 sm:space-y-2 text-gray-700 text-xs sm:text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span><strong>Dropdown Menu:</strong> Customize and add more tools</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span><strong>Pin Commands:</strong> Select favorites to pin</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span><strong>Workbook Name:</strong> Shows your current file name</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2-4. Ribbon, Tabs, Groups - Combined for mobile -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-purple-200">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">2</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-purple-900">Ribbon, Tabs & Groups</h3>
+            </div>
+            <img src="ribbon.png" alt="Excel Ribbon" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <img src="ribbontabs.png" alt="Ribbon Tabs" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <img src="ribbongroup.png" alt="Ribbon Groups" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-purple-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Ribbon:</strong> Main command center below Quick Access Toolbar</p>
+                <p class="text-gray-700 mb-3 text-sm sm:text-base"><strong>Tabs:</strong> Home, Insert, Formulas, Data, Review, View</p>
+                <p class="text-gray-700 text-sm sm:text-base"><strong>Groups:</strong> Related commands grouped within each tab</p>
+            </div>
+        </div>
+
+        <!-- 5. Search Bar -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-purple-200">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">3</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-purple-900">Search Bar</h3>
+            </div>
+            <img src="searchbar.png" alt="Search Bar" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-purple-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Purpose:</strong> Quickly find any Excel command</p>
+                <p class="text-xs sm:text-sm text-gray-600 italic">💡 Type what you want and Excel shows you the command!</p>
+            </div>
+        </div>
+
+        <!-- 6. Formula Bar -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-green-300">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">4</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-green-900">Formula Bar</h3>
+            </div>
+            <img src="formulabar.png" alt="Formula Bar" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-green-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-3 text-sm sm:text-base"><strong>Components:</strong></p>
+                <ul class="space-y-1 sm:space-y-2 text-gray-700 text-xs sm:text-sm">
+                    <li class="flex items-start">
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold mr-2 flex-shrink-0">Name Box</span>
+                        <span>Shows cell address (e.g., A1, B5)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold mr-2 flex-shrink-0">fx Button</span>
+                        <span>Opens Insert Function dialog</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold mr-2 flex-shrink-0">Formula Bar</span>
+                        <span>Shows cell content or formulas</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Insert Function -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-blue-300">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">5</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-900">Insert Function (fx)</h3>
+            </div>
+            <img src="insertfunction.png" alt="Insert Function Dialog" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-blue-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Opens:</strong> Click <code>fx</code> button in Formula Bar</p>
+                <p class="text-gray-700 text-sm sm:text-base"><strong>Purpose:</strong> User-friendly interface to insert functions</p>
+            </div>
+        </div>
+
+        <!-- 8. Worksheet -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-orange-300">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">6</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-orange-900">Worksheet (Grid)</h3>
+            </div>
+            <img src="worksheet.png" alt="Worksheet" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-orange-50 p-3 sm:p-4 rounded-lg">
+                <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Purpose:</strong> Main area where you enter data</p>
+                <ul class="space-y-1 text-xs sm:text-sm text-gray-700">
+                    <li><strong>Cells:</strong> Individual boxes (intersection of row & column)</li>
+                    <li><strong>Columns:</strong> Vertical sections (A, B, C...)</li>
+                    <li><strong>Rows:</strong> Horizontal sections (1, 2, 3...)</li>
+                    <li><strong>Cell Address:</strong> Column letter + row number (e.g., A1)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9. Sheet Tabs & Status Bar -->
+        <div class="mb-6 sm:mb-8 bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border-2 border-teal-300">
+            <div class="flex items-center mb-3 sm:mb-4">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base">7</div>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-teal-900">Sheet Tabs & Status Bar</h3>
+            </div>
+            <img src="sheetnameandstatusbar.png" alt="Sheet Tabs and Status Bar" class="w-full rounded-lg border-2 border-gray-300 shadow-md mb-3 sm:mb-4">
+            <div class="bg-teal-50 p-3 sm:p-4 rounded-lg">
+                <div class="mb-3">
+                    <h4 class="font-bold text-teal-800 mb-2 text-sm sm:text-base">📑 Sheet Tabs (Bottom Left):</h4>
+                    <ul class="space-y-1 text-xs sm:text-sm text-gray-700">
+                        <li>• Navigate between worksheets</li>
+                        <li>• Click "+" to add new sheets</li>
+                        <li>• Right-click to rename or manage</li>
+                    </ul>
+                </div>
+                <div class="border-t-2 border-teal-200 pt-3">
+                    <h4 class="font-bold text-teal-800 mb-2 text-sm sm:text-base">📊 Status Bar (Bottom Right):</h4>
+                    <ul class="space-y-1 text-xs sm:text-sm text-gray-700">
+                        <li>• Shows Average, Count, Sum of selected cells</li>
+                        <li>• Zoom control slider</li>
+                        <li>• View mode buttons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: SUM Function -->
+    <section class="w-full bg-gradient-to-r from-emerald-50 to-teal-50 p-4 sm:p-6 md:p-8 border-l-4 border-emerald-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-emerald-800 mb-4 sm:mb-6">SUM Function</h2>
+
+        <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-md mb-4 sm:mb-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-emerald-900 mb-3 sm:mb-4">📊 Example: Monthly Expenses</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-emerald-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Category</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Amount</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Rent</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right expense-cell excel-cell cursor-pointer text-xs sm:text-sm">1200</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Groceries</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right expense-cell excel-cell cursor-pointer text-xs sm:text-sm">450</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Utilities</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right expense-cell excel-cell cursor-pointer text-xs sm:text-sm">180</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Transport</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right expense-cell excel-cell cursor-pointer text-xs sm:text-sm">320</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">TOTAL</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 font-bold text-xs sm:text-sm" id="expense-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Buttons right below table -->
+            <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-4">
+                <button onclick="calculateExpenseSum()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full sm:w-auto">
+                    Calculate Total
+                </button>
+                <button onclick="showAltEqualsShortcut()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full sm:w-auto">
+                    ⚡ ALT + = Shortcut
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-blue-900 mb-2 sm:mb-3">📖 Formula Breakdown</h4>
+            <div class="bg-white p-2 sm:p-3 md:p-4 rounded font-mono text-sm sm:text-base md:text-lg mb-2 sm:mb-3 overflow-x-auto">
+                <span class="text-gray-600">Cell B6:</span> <span class="text-red-600">=SUM(<span class="bg-yellow-200 px-1 sm:px-2 rounded">B2:B5</span>)</span>
+            </div>
+            <ul class="space-y-1 sm:space-y-2 text-blue-900 text-xs sm:text-sm">
+                <li><strong>=SUM(</strong> - Start the SUM function</li>
+                <li><strong class="bg-yellow-200 px-1 sm:px-2 rounded">B2:B5</strong> - Range from B2 to B5</li>
+                <li><strong>)</strong> - Close the function</li>
+                <li class="text-green-700 font-semibold mt-2 sm:mt-4">💡 The colon (:) means "through"</li>
+            </ul>
+        </div>
+
+        <div id="expense-result" class="hidden mt-4 sm:mt-6 bg-green-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+    </section>
+
+    <!-- Cell References Section with TWO EXAMPLES -->
+    <section class="w-full bg-gradient-to-r from-pink-50 to-rose-50 p-4 sm:p-6 md:p-8 border-l-4 border-pink-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-pink-800 mb-4 sm:mb-6">Understanding Cell References</h2>
+        <p class="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6">Cell references control how formulas behave when copied:</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+            <!-- Relative -->
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border-t-4 border-red-500">
+                <h3 class="text-base sm:text-lg md:text-xl font-bold text-red-700 mb-3 sm:mb-4">🔄 Relative</h3>
+                <div class="bg-red-50 p-2 sm:p-3 rounded font-mono text-sm sm:text-base md:text-lg mb-3 sm:mb-4">
+                    <span class="text-red-600 font-bold">A1</span>
+                </div>
+                <p class="font-semibold mb-2 text-xs sm:text-sm">Changes when copied</p>
+                <div class="bg-gray-50 p-2 sm:p-3 md:p-4 rounded mb-2 sm:mb-3 text-xs sm:text-sm">
+                    <p><strong>B1:</strong> =A1*2</p>
+                    <p class="text-center text-lg sm:text-xl md:text-2xl text-green-600 my-1 sm:my-2">↓</p>
+                    <p><strong>B2:</strong> =A2*2</p>
+                </div>
+                <p class="text-xs text-gray-600">💡 For row/column adjustment</p>
+            </div>
+
+            <!-- Absolute -->
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border-t-4 border-green-500">
+                <h3 class="text-base sm:text-lg md:text-xl font-bold text-green-700 mb-3 sm:mb-4">🔒 Absolute</h3>
+                <div class="bg-green-50 p-2 sm:p-3 rounded font-mono text-sm sm:text-base md:text-lg mb-3 sm:mb-4">
+                    <span class="text-green-600 font-bold">$A$1</span>
+                </div>
+                <p class="font-semibold mb-2 text-xs sm:text-sm">Never changes</p>
+                <div class="bg-gray-50 p-2 sm:p-3 md:p-4 rounded mb-2 sm:mb-3 text-xs sm:text-sm">
+                    <p><strong>B1:</strong> =$A$1*2</p>
+                    <p class="text-center text-lg sm:text-xl md:text-2xl text-green-600 my-1 sm:my-2">↓</p>
+                    <p><strong>B2:</strong> =$A$1*2</p>
+                </div>
+                <p class="text-xs text-gray-600">💡 For constant values</p>
+                <p class="text-xs bg-green-100 p-2 rounded mt-2"><strong>⌨️ Shortcut:</strong> Press <code>F4</code></p>
+            </div>
+
+            <!-- Mixed -->
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border-t-4 border-yellow-500">
+                <h3 class="text-base sm:text-lg md:text-xl font-bold text-yellow-700 mb-3 sm:mb-4">🔀 Mixed</h3>
+                <div class="bg-yellow-50 p-2 sm:p-3 rounded font-mono text-sm sm:text-base md:text-lg mb-3 sm:mb-4">
+                    <span class="text-yellow-700 font-bold">$A1</span> or <span class="text-yellow-700 font-bold">A$1</span>
+                </div>
+                <p class="font-semibold mb-2 text-xs sm:text-sm">Locks row OR column</p>
+                <div class="bg-gray-50 p-2 sm:p-3 md:p-4 rounded mb-2 sm:mb-3 text-xs">
+                    <p><strong>$A1:</strong> Column locked</p>
+                    <p><strong>A$1:</strong> Row locked</p>
+                </div>
+                <p class="text-xs text-gray-600">💡 For multiplication tables</p>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 1: Single Tax Rate -->
+        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md mb-6 sm:mb-8">
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-900 mb-3 sm:mb-4">💰 Example 1: Single Tax Rate (8.5%)</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-pink-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">C</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Tax Rate</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-red-100 text-center font-bold text-xs sm:text-sm">8.5%</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Product</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Price</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">With Tax</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Laptop</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$999</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 tax-result text-xs sm:text-sm" id="tax-1"></td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Mouse</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$29</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 tax-result text-xs sm:text-sm" id="tax-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Keyboard</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$79</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 tax-result text-xs sm:text-sm" id="tax-3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Button right below table -->
+            <div class="mt-4 sm:mt-6">
+                <button onclick="calculateTaxPrices()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Calculate Prices with Tax
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-pink-50 border-l-4 border-pink-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-pink-900 mb-2 sm:mb-3">📖 Formula in C4: =B4*(1+$B$1)</h4>
+            <ul class="space-y-1 sm:space-y-2 text-pink-900 text-xs sm:text-sm">
+                <li><strong>B4</strong> - Relative (changes: B4→B5→B6)</li>
+                <li><strong>$B$1</strong> - Absolute (always stays B1)</li>
+            </ul>
+        </div>
+
+        <div id="tax-result" class="hidden mt-4 sm:mt-6 bg-pink-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+
+        <!-- EXAMPLE 2: Mixed References - Flash Fill Magic -->
+        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md mb-6 sm:mb-8 mt-8">
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-900 mb-3 sm:mb-4">💰 Example 2: Mixed References - Flash Fill Entire Grid!</h3>
+            <p class="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4">Write ONE formula, flash fill ALL cells! ⚡</p>
+
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-pink-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm"></th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">C</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-red-100 text-center font-bold text-xs sm:text-sm">8%</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-100 text-center font-bold text-xs sm:text-sm">12%</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Product</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Price</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Tax 8%</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Tax 12%</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Shirt</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$50</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-1a">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-c4"></div>
+                                <div id="result-c4"></div>
+                            </td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-1b">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-d4"></div>
+                                <div id="result-d4"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Shoes</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$120</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-2a">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-c5"></div>
+                                <div id="result-c5"></div>
+                            </td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-2b">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-d5"></div>
+                                <div id="result-d5"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-pink-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Watch</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right text-xs sm:text-sm">$200</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-3a">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-c6"></div>
+                                <div id="result-c6"></div>
+                            </td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-50 text-xs sm:text-sm" id="dual-tax-3b">
+                                <div class="formula-display text-purple-600 font-mono text-xs" id="formula-d6"></div>
+                                <div id="result-d6"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Button right below table for better UX -->
+            <div class="mt-4 sm:mt-6">
+                <button onclick="demonstrateCopying()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Watch Interactive Demo - See Formula Changes Live!
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-purple-900 mb-3 sm:mb-4">🎯 The Magic Formula - Mixed Reference!</h4>
+            <div class="space-y-3 sm:space-y-4 text-xs sm:text-sm text-gray-800">
+                <div class="bg-white p-3 sm:p-4 rounded-lg shadow-lg border-2 border-green-500">
+                    <p class="font-bold text-green-700 mb-2 text-base sm:text-lg">✅ STEP 1: Enter formula in C4</p>
+                    <p class="font-mono bg-gray-100 p-3 rounded text-sm sm:text-base mb-2">=B4*(1+C$1)</p>
+                    <div class="text-gray-700 space-y-1">
+                        <p>• <strong>B4</strong> - Relative (will change when copied)</p>
+                        <p>• <strong>C$1</strong> - Mixed! Column C changes, Row $1 locked</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-3 sm:p-4 rounded-lg shadow">
+                    <p class="font-bold text-blue-700 mb-2">⬇️ STEP 2: Copy DOWN (fills C5, C6)</p>
+                    <p class="font-mono bg-gray-100 p-2 rounded mb-1">C5: =B5*(1+C$1)</p>
+                    <p class="font-mono bg-gray-100 p-2 rounded mb-2">C6: =B6*(1+C$1)</p>
+                    <p class="text-gray-600">Row changes for price (B4→B5→B6), but tax stays C$1!</p>
+                </div>
+
+                <div class="bg-white p-3 sm:p-4 rounded-lg shadow">
+                    <p class="font-bold text-orange-700 mb-2">➡️ STEP 3: Copy RIGHT (fills entire D column!)</p>
+                    <p class="font-mono bg-gray-100 p-2 rounded mb-1">D4: =B4*(1+D$1)</p>
+                    <p class="font-mono bg-gray-100 p-2 rounded mb-1">D5: =B5*(1+D$1)</p>
+                    <p class="font-mono bg-gray-100 p-2 rounded mb-2">D6: =B6*(1+D$1)</p>
+                    <p class="text-gray-600">Column changes (C→D), so now uses 12% tax!</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 sm:p-4 rounded-lg border-2 border-yellow-500">
+                    <p class="font-bold text-orange-800 mb-2 text-base">⚡ Flash Fill Trick:</p>
+                    <p class="text-gray-800 mb-2">Select C4 and drag the fill handle (bottom-right corner) to D6!</p>
+                    <p class="text-gray-800 font-bold">ALL 6 cells fill automatically with the correct formulas! ✨</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-green-100 to-blue-100 p-3 sm:p-4 rounded-lg border-2 border-green-600">
+                    <p class="font-bold text-green-800 mb-2">💡 Why Mixed Reference C$1?</p>
+                    <p class="text-gray-800 mb-2"><strong>$1</strong> (locked row) = Tax rate always stays in row 1</p>
+                    <p class="text-gray-800"><strong>C</strong> (free column) = When copied right, changes to D (different tax rate!)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result box for demo -->
+        <div id="dual-tax-result" class="hidden mt-4 sm:mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base shadow-xl"></div>
+    </section>
+
+    <!-- Quick Reference Guide -->
+    <section class="w-full bg-gradient-to-r from-gray-800 to-gray-900 text-white p-4 sm:p-6 md:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">Quick Reference</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            <div class="bg-white bg-opacity-10 p-4 sm:p-6 rounded-xl">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">⌨️ Shortcuts</h3>
+                <div class="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">Ctrl+C</code> - Copy</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">Ctrl+V</code> - Paste</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">Ctrl+Z</code> - Undo</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">F4</code> - Toggle refs</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">Alt+=</code> - Auto Sum</p>
+                </div>
+            </div>
+            <div class="bg-white bg-opacity-10 p-4 sm:p-6 rounded-xl">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">🔤 Functions</h3>
+                <div class="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">=SUM()</code> - Add</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">=AVERAGE()</code> - Mean</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">=COUNT()</code> - Count</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">=MAX()</code> - Highest</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">=MIN()</code> - Lowest</p>
+                </div>
+            </div>
+            <div class="bg-white bg-opacity-10 p-4 sm:p-6 rounded-xl">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">📍 References</h3>
+                <div class="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">A1</code> - Relative</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">$A$1</code> - Absolute</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">$A1</code> - Mixed (col)</p>
+                    <p><code class="bg-gray-700 px-2 py-1 rounded">A$1</code> - Mixed (row)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // SUM Function
+        function calculateExpenseSum() {
+            const values = [1200, 450, 180, 320];
+            const cells = document.querySelectorAll('.expense-cell');
+            let total = 0;
+
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.classList.add('selected', 'bg-green-200');
+                    total += values[index];
+                }, index * 300);
+            });
+
+            setTimeout(() => {
+                document.getElementById('expense-total').textContent = '$' + total.toLocaleString();
+                document.getElementById('expense-total').classList.add('text-green-700');
+
+                const resultBox = document.getElementById('expense-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ Total: $${total.toLocaleString()}</h3>
+                    <p class="text-sm sm:text-base">Formula =SUM(B2:B5) added all expenses!</p>
+                `;
+
+                setTimeout(() => {
+                    cells.forEach(cell => cell.classList.remove('selected', 'bg-green-200'));
+                }, 2000);
+            }, 1500);
+        }
+
+        function showAltEqualsShortcut() {
+            const resultBox = document.getElementById('expense-result');
+            resultBox.classList.remove('hidden');
+            resultBox.innerHTML = `
+                <h3 class="text-lg sm:text-xl font-bold mb-2">⚡ ALT + = Shortcut</h3>
+                <p class="text-sm sm:text-base mb-1"><strong>Step 1:</strong> Select cell B6</p>
+                <p class="text-sm sm:text-base mb-1"><strong>Step 2:</strong> Press ALT and = together</p>
+                <p class="text-sm sm:text-base mb-1"><strong>Step 3:</strong> Excel detects B2:B5</p>
+                <p class="text-sm sm:text-base"><strong>Step 4:</strong> Press Enter!</p>
+            `;
+        }
+
+        // Cell References - Single Tax
+        function calculateTaxPrices() {
+            const prices = [999, 29, 79];
+            const taxRate = 0.085;
+
+            prices.forEach((price, index) => {
+                setTimeout(() => {
+                    const priceWithTax = price * (1 + taxRate);
+                    const cell = document.getElementById(`tax-${index + 1}`);
+                    cell.textContent = '$' + priceWithTax.toFixed(2);
+                    cell.classList.add('text-pink-700', 'font-bold');
+                }, index * 500);
+            });
+
+            setTimeout(() => {
+                const resultBox = document.getElementById('tax-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ All Prices Calculated!</h3>
+                    <p class="text-sm sm:text-base">B4, B5, B6 changed (relative) but $B$1 stayed same (absolute)!</p>
+                `;
+            }, 2000);
+        }
+
+        // Cell References - Mixed Reference Flash Fill with Visual Explanation
+        function demonstrateCopying() {
+            const prices = [50, 120, 200];
+            const taxRate1 = 0.08;
+            const taxRate2 = 0.12;
+            const resultBox = document.getElementById('dual-tax-result');
+
+            // Helper function to get table cell by coordinates (accounting for thead)
+            function getCellByCoords(col, row) {
+                const tables = document.querySelectorAll('.excel-table');
+                const table = tables[tables.length - 1]; // Get the last table (mixed reference example)
+                const tbody = table.querySelector('tbody');
+                const rowElement = tbody.rows[row - 1]; // row 1 is tbody.rows[0]
+                const colIndex = col === 'A' ? 1 : col === 'B' ? 2 : col === 'C' ? 3 : 4;
+                return rowElement.cells[colIndex];
+            }
+
+            // Reset all cells and highlights
+            for (let row = 4; row <= 6; row++) {
+                ['c', 'd'].forEach(col => {
+                    document.getElementById(`formula-${col}${row}`).textContent = '';
+                    document.getElementById(`result-${col}${row}`).textContent = '';
+                    document.getElementById(`dual-tax-${row-3}a`).classList.remove('bg-green-200', 'bg-purple-200', 'bg-orange-200');
+                    document.getElementById(`dual-tax-${row-3}b`).classList.remove('bg-blue-200', 'bg-purple-200', 'bg-orange-200');
+                });
+            }
+            // Remove all border highlights
+            document.querySelectorAll('.excel-table td').forEach(cell => {
+                cell.classList.remove('ring-4', 'ring-red-500', 'ring-orange-500', 'ring-blue-500');
+            });
+
+            resultBox.classList.add('hidden');
+
+            // Step 1: Fill C4 with MIXED reference - Highlight what it references
+            setTimeout(() => {
+                const c4 = document.getElementById('dual-tax-1a');
+                const c1 = getCellByCoords('C', 1);
+                const b4 = getCellByCoords('B', 4);
+
+                c4.classList.add('bg-green-200');
+                c1.classList.add('ring-4', 'ring-red-500'); // Highlight tax rate
+                b4.classList.add('ring-4', 'ring-orange-500'); // Highlight price
+
+                document.getElementById('formula-c4').textContent = '=B4*(1+C$1)';
+                document.getElementById('result-c4').textContent = '$' + (prices[0] * (1 + taxRate1)).toFixed(2);
+
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-base sm:text-lg font-bold mb-2">✅ STEP 1: Enter formula in C4</h3>
+                    <p class="text-xs sm:text-sm mb-2">Formula: <span class="font-mono bg-white text-purple-700 px-2 py-1 rounded">=B4*(1+C$1)</span></p>
+                    <div class="bg-white text-gray-900 p-2 rounded text-xs sm:text-sm space-y-1">
+                        <p>🟠 <strong>B4</strong> = Price (relative, will change)</p>
+                        <p>🔴 <strong>C$1</strong> = Tax rate (row locked with <strong>$1</strong>)</p>
+                    </div>
+                `;
+            }, 500);
+
+            // Step 2: Copy DOWN - Show why row locks matter
+            setTimeout(() => {
+                // Clear previous highlights
+                document.querySelectorAll('.excel-table td').forEach(cell => {
+                    cell.classList.remove('ring-4', 'ring-red-500', 'ring-orange-500', 'ring-blue-500');
+                });
+
+                const c5 = document.getElementById('dual-tax-2a');
+                const c1 = getCellByCoords('C', 1);
+                const b5 = getCellByCoords('B', 5);
+
+                c5.classList.add('bg-green-200');
+                c1.classList.add('ring-4', 'ring-red-500'); // Tax still C1
+                b5.classList.add('ring-4', 'ring-orange-500'); // Price moved to B5
+
+                document.getElementById('formula-c5').textContent = '=B5*(1+C$1)';
+                document.getElementById('result-c5').textContent = '$' + (prices[1] * (1 + taxRate1)).toFixed(2);
+
+                resultBox.innerHTML = `
+                    <h3 class="text-base sm:text-lg font-bold mb-2">⬇️ STEP 2: Copy DOWN to C5</h3>
+                    <p class="text-xs sm:text-sm mb-2">C5: <span class="font-mono bg-white text-purple-700 px-2 py-1 rounded">=B5*(1+C$1)</span></p>
+                    <div class="bg-white text-gray-900 p-2 rounded text-xs sm:text-sm space-y-1">
+                        <p>🟠 B4 → <strong>B5</strong> (row changed, relative)</p>
+                        <p>🔴 C$1 → <strong>C$1</strong> (row LOCKED with $, still row 1!)</p>
+                    </div>
+                    <p class="text-xs sm:text-sm bg-green-700 p-2 rounded mt-2">💡 Row $1 doesn't change when copying down!</p>
+                `;
+            }, 2500);
+
+            setTimeout(() => {
+                document.querySelectorAll('.excel-table td').forEach(cell => {
+                    cell.classList.remove('ring-4', 'ring-red-500', 'ring-orange-500', 'ring-blue-500');
+                });
+
+                const c6 = document.getElementById('dual-tax-3a');
+                const c1 = getCellByCoords('C', 1);
+                const b6 = getCellByCoords('B', 6);
+
+                c6.classList.add('bg-green-200');
+                c1.classList.add('ring-4', 'ring-red-500');
+                b6.classList.add('ring-4', 'ring-orange-500');
+
+                document.getElementById('formula-c6').textContent = '=B6*(1+C$1)';
+                document.getElementById('result-c6').textContent = '$' + (prices[2] * (1 + taxRate1)).toFixed(2);
+
+                resultBox.innerHTML = `
+                    <h3 class="text-base sm:text-lg font-bold mb-2">⬇️ Continue DOWN to C6</h3>
+                    <p class="text-xs sm:text-sm mb-2">C6: <span class="font-mono bg-white text-purple-700 px-2 py-1 rounded">=B6*(1+C$1)</span></p>
+                    <div class="bg-white text-gray-900 p-2 rounded text-xs sm:text-sm">
+                        <p>🟠 B4 → B5 → <strong>B6</strong> (rows keep changing)</p>
+                        <p>🔴 C$1 → C$1 → <strong>C$1</strong> (always row 1!)</p>
+                    </div>
+                `;
+            }, 4500);
+
+            // Step 3: Select range to copy right
+            setTimeout(() => {
+                document.querySelectorAll('.excel-table td').forEach(cell => {
+                    cell.classList.remove('ring-4', 'ring-red-500', 'ring-orange-500', 'ring-blue-500');
+                });
+
+                for (let i = 1; i <= 3; i++) {
+                    document.getElementById(`dual-tax-${i}a`).classList.add('bg-purple-200');
+                    document.getElementById(`dual-tax-${i}a`).classList.remove('bg-green-200');
+                }
+
+                resultBox.innerHTML = `
+                    <h3 class="text-base sm:text-lg font-bold mb-2">🎯 STEP 3: Select C4:C6 range</h3>
+                    <p class="text-xs sm:text-sm bg-purple-700 p-2 rounded">Ready to drag RIGHT! Column will change...</p>
+                `;
+            }, 6500);
+
+            // Step 4: Copy RIGHT - Show why column changes
+            setTimeout(() => {
+                const d1 = getCellByCoords('D', 1);
+                const d4 = document.getElementById('dual-tax-1b');
+                const d5 = document.getElementById('dual-tax-2b');
+                const d6 = document.getElementById('dual-tax-3b');
+
+                d1.classList.add('ring-4', 'ring-blue-500'); // Highlight new tax rate
+                d4.classList.add('bg-blue-200');
+                d5.classList.add('bg-blue-200');
+                d6.classList.add('bg-blue-200');
+
+                document.getElementById('formula-d4').textContent = '=B4*(1+D$1)';
+                document.getElementById('result-d4').textContent = '$' + (prices[0] * (1 + taxRate2)).toFixed(2);
+
+                document.getElementById('formula-d5').textContent = '=B5*(1+D$1)';
+                document.getElementById('result-d5').textContent = '$' + (prices[1] * (1 + taxRate2)).toFixed(2);
+
+                document.getElementById('formula-d6').textContent = '=B6*(1+D$1)';
+                document.getElementById('result-d6').textContent = '$' + (prices[2] * (1 + taxRate2)).toFixed(2);
+
+                resultBox.innerHTML = `
+                    <h3 class="text-base sm:text-lg font-bold mb-2">➡️ STEP 4: Drag RIGHT to column D!</h3>
+                    <p class="text-xs sm:text-sm mb-2 bg-blue-700 p-2 rounded">ALL 3 formulas filled instantly!</p>
+                    <div class="bg-white text-gray-900 p-2 rounded text-xs sm:text-sm space-y-1 mb-2">
+                        <p>D4: <span class="font-mono text-purple-700">=B4*(1+D$1)</span></p>
+                        <p>D5: <span class="font-mono text-purple-700">=B5*(1+D$1)</span></p>
+                        <p>D6: <span class="font-mono text-purple-700">=B6*(1+D$1)</span></p>
+                    </div>
+                    <div class="bg-yellow-400 text-gray-900 p-2 rounded text-xs sm:text-sm space-y-1">
+                        <p><strong>Column NOT locked:</strong> C$1 → <strong>D$1</strong></p>
+                        <p><strong>Row IS locked:</strong> $1 stays $1 (always row 1)</p>
+                        <p class="font-bold mt-1">🔵 Now uses 12% tax from D1!</p>
+                    </div>
+                `;
+            }, 8000);
+
+            // Final summary
+            setTimeout(() => {
+                document.querySelectorAll('.excel-table td').forEach(cell => {
+                    cell.classList.remove('ring-4', 'ring-blue-500');
+                });
+
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-3">🎉 Flash Fill Complete!</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm mb-3">
+                        <div class="bg-green-700 p-2 sm:p-3 rounded">
+                            <p class="font-bold mb-1">Column C (8% Tax)</p>
+                            <p class="text-xs">C4: =B4*(1+C$1)</p>
+                            <p class="text-xs">C5: =B5*(1+C$1)</p>
+                            <p class="text-xs">C6: =B6*(1+C$1)</p>
+                        </div>
+                        <div class="bg-blue-700 p-2 sm:p-3 rounded">
+                            <p class="font-bold mb-1">Column D (12% Tax)</p>
+                            <p class="text-xs">D4: =B4*(1+D$1)</p>
+                            <p class="text-xs">D5: =B5*(1+D$1)</p>
+                            <p class="text-xs">D6: =B6*(1+D$1)</p>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-400 text-gray-900 p-3 rounded space-y-2">
+                        <p class="font-bold text-base">💡 Understanding C$1 (Mixed Reference):</p>
+                        <p class="text-xs sm:text-sm"><strong>⬇️ When copying DOWN:</strong> $1 is LOCKED → Always uses row 1 (tax rate)</p>
+                        <p class="text-xs sm:text-sm"><strong>➡️ When copying RIGHT:</strong> C is FREE → Changes to D (different column)</p>
+                        <p class="text-xs sm:text-sm font-bold mt-2 pt-2 border-t border-gray-600">Result: Write ONE formula → Flash fill entire grid! ⚡</p>
+                    </div>
+                `;
+
+                // Remove highlights after showing result
+                setTimeout(() => {
+                    for (let row = 4; row <= 6; row++) {
+                        document.getElementById(`dual-tax-${row-3}a`).classList.remove('bg-green-200', 'bg-purple-200');
+                        document.getElementById(`dual-tax-${row-3}b`).classList.remove('bg-blue-200');
+                    }
+                }, 4000);
+            }, 10000);
+        }
+    </script>
+
 </body>
 </html>
