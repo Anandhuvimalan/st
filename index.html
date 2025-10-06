@@ -414,6 +414,286 @@
         <div id="expense-result" class="hidden mt-4 sm:mt-6 bg-green-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
     </section>
 
+    <!-- Section 5: COUNT Function -->
+    <section class="w-full bg-gradient-to-r from-blue-50 to-cyan-50 p-4 sm:p-6 md:p-8 border-l-4 border-blue-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-blue-800 mb-4 sm:mb-6">COUNT Function</h2>
+
+        <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-md mb-4 sm:mb-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-blue-900 mb-3 sm:mb-4">📊 Example: Student Test Scores</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-blue-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Student</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Score</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Alice</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right count-cell excel-cell cursor-pointer text-xs sm:text-sm">85</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Bob</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right count-cell excel-cell cursor-pointer text-xs sm:text-sm">92</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Charlie</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right count-cell excel-cell cursor-pointer text-xs sm:text-sm">78</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Diana</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right count-cell excel-cell cursor-pointer text-xs sm:text-sm">95</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Eve</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right count-cell excel-cell cursor-pointer text-xs sm:text-sm">88</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-blue-700 text-white font-bold text-center text-xs sm:text-sm">7</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">COUNT</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 font-bold text-xs sm:text-sm" id="count-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 sm:mt-6">
+                <button onclick="calculateCount()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Count Students
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-blue-900 mb-2 sm:mb-3">📖 Formula: =COUNT(B2:B6)</h4>
+            <p class="text-xs sm:text-sm text-blue-900">Counts how many cells contain numbers in the range B2 to B6</p>
+        </div>
+
+        <div id="count-result" class="hidden mt-4 sm:mt-6 bg-blue-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+    </section>
+
+    <!-- Section 6: MAX Function -->
+    <section class="w-full bg-gradient-to-r from-orange-50 to-amber-50 p-4 sm:p-6 md:p-8 border-l-4 border-orange-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-orange-800 mb-4 sm:mb-6">MAX Function</h2>
+
+        <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-md mb-4 sm:mb-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-orange-900 mb-3 sm:mb-4">📊 Example: Weekly Sales</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-orange-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Day</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Sales ($)</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Monday</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right max-cell excel-cell cursor-pointer text-xs sm:text-sm">2500</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Tuesday</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right max-cell excel-cell cursor-pointer text-xs sm:text-sm">3200</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Wednesday</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right max-cell excel-cell cursor-pointer text-xs sm:text-sm">2800</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Thursday</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right max-cell excel-cell cursor-pointer text-xs sm:text-sm">4100</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Friday</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right max-cell excel-cell cursor-pointer text-xs sm:text-sm">3600</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-orange-700 text-white font-bold text-center text-xs sm:text-sm">7</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">HIGHEST</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 font-bold text-xs sm:text-sm" id="max-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 sm:mt-6">
+                <button onclick="calculateMax()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Find Highest Sale
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-orange-900 mb-2 sm:mb-3">📖 Formula: =MAX(B2:B6)</h4>
+            <p class="text-xs sm:text-sm text-orange-900">Returns the highest value from the range B2 to B6</p>
+        </div>
+
+        <div id="max-result" class="hidden mt-4 sm:mt-6 bg-orange-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+    </section>
+
+    <!-- Section 7: MIN Function -->
+    <section class="w-full bg-gradient-to-r from-purple-50 to-violet-50 p-4 sm:p-6 md:p-8 border-l-4 border-purple-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-purple-800 mb-4 sm:mb-6">MIN Function</h2>
+
+        <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-md mb-4 sm:mb-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-purple-900 mb-3 sm:mb-4">📊 Example: City Temperatures (°C)</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-purple-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">City</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Temp (°C)</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Delhi</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right min-cell excel-cell cursor-pointer text-xs sm:text-sm">42</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Mumbai</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right min-cell excel-cell cursor-pointer text-xs sm:text-sm">35</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Shimla</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right min-cell excel-cell cursor-pointer text-xs sm:text-sm">18</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Bangalore</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right min-cell excel-cell cursor-pointer text-xs sm:text-sm">28</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Kolkata</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right min-cell excel-cell cursor-pointer text-xs sm:text-sm">38</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-purple-700 text-white font-bold text-center text-xs sm:text-sm">7</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">LOWEST</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 font-bold text-xs sm:text-sm" id="min-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 sm:mt-6">
+                <button onclick="calculateMin()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Find Lowest Temperature
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-purple-900 mb-2 sm:mb-3">📖 Formula: =MIN(B2:B6)</h4>
+            <p class="text-xs sm:text-sm text-purple-900">Returns the lowest value from the range B2 to B6</p>
+        </div>
+
+        <div id="min-result" class="hidden mt-4 sm:mt-6 bg-purple-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+    </section>
+
+    <!-- Section 8: AVERAGE Function -->
+    <section class="w-full bg-gradient-to-r from-rose-50 to-red-50 p-4 sm:p-6 md:p-8 border-l-4 border-rose-600">
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-800 mb-4 sm:mb-6">AVERAGE Function</h2>
+
+        <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-md mb-4 sm:mb-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-rose-900 mb-3 sm:mb-4">📊 Example: Product Ratings</h3>
+            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                <table class="excel-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-rose-700 text-white">
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Row</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">A</th>
+                            <th class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Reviewer</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">Rating</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Customer 1</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right avg-cell excel-cell cursor-pointer text-xs sm:text-sm">4.5</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Customer 2</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right avg-cell excel-cell cursor-pointer text-xs sm:text-sm">3.8</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Customer 3</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right avg-cell excel-cell cursor-pointer text-xs sm:text-sm">4.2</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Customer 4</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right avg-cell excel-cell cursor-pointer text-xs sm:text-sm">4.7</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">6</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">Customer 5</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right avg-cell excel-cell cursor-pointer text-xs sm:text-sm">3.9</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 bg-rose-700 text-white font-bold text-center text-xs sm:text-sm">7</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 font-bold text-xs sm:text-sm">AVERAGE</td>
+                            <td class="border border-gray-300 px-2 py-1 sm:px-4 sm:py-2 text-right bg-yellow-100 font-bold text-xs sm:text-sm" id="avg-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 sm:mt-6">
+                <button onclick="calculateAverage()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-lg transition text-sm sm:text-base w-full shadow-lg">
+                    ▶️ Calculate Average Rating
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-rose-50 border-l-4 border-rose-500 p-3 sm:p-4 md:p-6 rounded-lg mb-4 sm:mb-6">
+            <h4 class="text-base sm:text-lg font-bold text-rose-900 mb-2 sm:mb-3">📖 Formula: =AVERAGE(B2:B6)</h4>
+            <p class="text-xs sm:text-sm text-rose-900">Calculates the mean (average) of all values in the range B2 to B6</p>
+        </div>
+
+        <div id="avg-result" class="hidden mt-4 sm:mt-6 bg-rose-600 text-white p-4 sm:p-6 rounded-xl slide-in text-sm sm:text-base"></div>
+    </section>
+
     <!-- Cell References Section with TWO EXAMPLES -->
     <section class="w-full bg-gradient-to-r from-pink-50 to-rose-50 p-4 sm:p-6 md:p-8 border-l-4 border-pink-600">
         <h2 class="text-2xl sm:text-3xl font-bold text-pink-800 mb-4 sm:mb-6">Understanding Cell References</h2>
@@ -751,28 +1031,84 @@
             `;
         }
 
-        // Cell References - Single Tax
+        // Cell References - Single Tax with Visual Highlighting
         function calculateTaxPrices() {
             const prices = [999, 29, 79];
             const taxRate = 0.085;
+            const resultBox = document.getElementById('tax-result');
 
+            // Get the first table (single tax example)
+            const tables = document.querySelectorAll('.excel-table');
+            let singleTaxTable = null;
+
+            // Find the table with "Tax Rate" in first row
+            for (let table of tables) {
+                const firstRowText = table.rows[1].cells[1].textContent;
+                if (firstRowText.includes('Tax Rate')) {
+                    singleTaxTable = table;
+                    break;
+                }
+            }
+
+            // Remove any existing highlights
+            if (singleTaxTable) {
+                singleTaxTable.querySelectorAll('td').forEach(cell => {
+                    cell.classList.remove('ring-4', 'ring-red-500', 'ring-orange-500');
+                });
+            }
+
+            // Calculate with highlights for each row
             prices.forEach((price, index) => {
                 setTimeout(() => {
                     const priceWithTax = price * (1 + taxRate);
                     const cell = document.getElementById(`tax-${index + 1}`);
                     cell.textContent = '$' + priceWithTax.toFixed(2);
-                    cell.classList.add('text-pink-700', 'font-bold');
-                }, index * 500);
+                    cell.classList.add('text-pink-700', 'font-bold', 'bg-yellow-200');
+
+                    // Highlight the tax rate and price being used
+                    if (singleTaxTable) {
+                        const taxCell = singleTaxTable.rows[1].cells[2]; // B1 tax rate
+                        const priceCell = singleTaxTable.rows[index + 4].cells[2]; // B4, B5, B6
+
+                        taxCell.classList.add('ring-4', 'ring-red-500');
+                        priceCell.classList.add('ring-4', 'ring-orange-500');
+
+                        resultBox.classList.remove('hidden');
+                        resultBox.innerHTML = `
+                            <h3 class="text-base sm:text-lg font-bold mb-2">Step ${index + 1}: Calculating Row ${index + 4}</h3>
+                            <div class="bg-white text-gray-900 p-2 rounded text-xs sm:text-sm space-y-1">
+                                <p>🟠 <strong>B${index + 4}</strong> = $${price} (price - relative reference)</p>
+                                <p>🔴 <strong>$B$1</strong> = 8.5% (tax - absolute reference, never changes!)</p>
+                                <p class="font-bold text-pink-800">Result: $${price} × 1.085 = $${priceWithTax.toFixed(2)}</p>
+                            </div>
+                        `;
+
+                        // Remove highlights after a moment
+                        setTimeout(() => {
+                            taxCell.classList.remove('ring-4', 'ring-red-500');
+                            priceCell.classList.remove('ring-4', 'ring-orange-500');
+                        }, 1200);
+                    }
+                }, index * 1500);
             });
 
             setTimeout(() => {
-                const resultBox = document.getElementById('tax-result');
-                resultBox.classList.remove('hidden');
                 resultBox.innerHTML = `
                     <h3 class="text-lg sm:text-xl font-bold mb-2">✅ All Prices Calculated!</h3>
-                    <p class="text-sm sm:text-base">B4, B5, B6 changed (relative) but $B$1 stayed same (absolute)!</p>
+                    <div class="bg-white text-gray-900 p-3 rounded text-xs sm:text-sm space-y-2 mb-3">
+                        <p><strong>Formula Pattern:</strong> =B4*(1+$B$1)</p>
+                        <p>🟠 B4, B5, B6 changed (relative reference)</p>
+                        <p>🔴 $B$1 stayed at row 1 (absolute reference - locked!)</p>
+                    </div>
+                    <p class="text-sm sm:text-base bg-yellow-400 text-gray-900 p-2 rounded font-bold">💡 $B$1 never changes no matter where you copy the formula!</p>
                 `;
-            }, 2000);
+
+                // Clear all bg highlights
+                for (let i = 1; i <= 3; i++) {
+                    const cell = document.getElementById(`tax-${i}`);
+                    cell.classList.remove('bg-yellow-200');
+                }
+            }, prices.length * 1500 + 500);
         }
 
         // Cell References - Mixed Reference Flash Fill with Visual Explanation
@@ -979,6 +1315,139 @@
                     }
                 }, 4000);
             }, 10000);
+        }
+
+        // COUNT Function
+        function calculateCount() {
+            const cells = document.querySelectorAll('.count-cell');
+            let count = 0;
+
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.classList.add('selected', 'bg-blue-200');
+                    count++;
+                }, index * 300);
+            });
+
+            setTimeout(() => {
+                document.getElementById('count-total').textContent = count;
+                document.getElementById('count-total').classList.add('text-blue-700');
+
+                const resultBox = document.getElementById('count-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ Total Students: ${count}</h3>
+                    <p class="text-sm sm:text-base">Formula =COUNT(B2:B6) counted all numeric values!</p>
+                `;
+
+                setTimeout(() => {
+                    cells.forEach(cell => cell.classList.remove('selected', 'bg-blue-200'));
+                }, 2000);
+            }, 1800);
+        }
+
+        // MAX Function
+        function calculateMax() {
+            const values = [2500, 3200, 2800, 4100, 3600];
+            const cells = document.querySelectorAll('.max-cell');
+            let maxValue = Math.max(...values);
+            let maxIndex = values.indexOf(maxValue);
+
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.classList.add('selected');
+                    if (index === maxIndex) {
+                        cell.classList.add('bg-orange-300');
+                    } else {
+                        cell.classList.add('bg-orange-100');
+                    }
+                }, index * 300);
+            });
+
+            setTimeout(() => {
+                document.getElementById('max-total').textContent = '$' + maxValue.toLocaleString();
+                document.getElementById('max-total').classList.add('text-orange-700');
+
+                const resultBox = document.getElementById('max-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ Highest Sale: $${maxValue.toLocaleString()}</h3>
+                    <p class="text-sm sm:text-base">Formula =MAX(B2:B6) found the highest value!</p>
+                    <p class="text-sm sm:text-base mt-2">🎯 Thursday had the best sales!</p>
+                `;
+
+                setTimeout(() => {
+                    cells.forEach(cell => cell.classList.remove('selected', 'bg-orange-100', 'bg-orange-300'));
+                }, 2000);
+            }, 1800);
+        }
+
+        // MIN Function
+        function calculateMin() {
+            const values = [42, 35, 18, 28, 38];
+            const cells = document.querySelectorAll('.min-cell');
+            let minValue = Math.min(...values);
+            let minIndex = values.indexOf(minValue);
+
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.classList.add('selected');
+                    if (index === minIndex) {
+                        cell.classList.add('bg-purple-300');
+                    } else {
+                        cell.classList.add('bg-purple-100');
+                    }
+                }, index * 300);
+            });
+
+            setTimeout(() => {
+                document.getElementById('min-total').textContent = minValue + '°C';
+                document.getElementById('min-total').classList.add('text-purple-700');
+
+                const resultBox = document.getElementById('min-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ Lowest Temperature: ${minValue}°C</h3>
+                    <p class="text-sm sm:text-base">Formula =MIN(B2:B6) found the lowest value!</p>
+                    <p class="text-sm sm:text-base mt-2">❄️ Shimla is the coolest city!</p>
+                `;
+
+                setTimeout(() => {
+                    cells.forEach(cell => cell.classList.remove('selected', 'bg-purple-100', 'bg-purple-300'));
+                }, 2000);
+            }, 1800);
+        }
+
+        // AVERAGE Function
+        function calculateAverage() {
+            const values = [4.5, 3.8, 4.2, 4.7, 3.9];
+            const cells = document.querySelectorAll('.avg-cell');
+            let total = 0;
+
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.classList.add('selected', 'bg-rose-200');
+                    total += values[index];
+                }, index * 300);
+            });
+
+            setTimeout(() => {
+                const average = total / values.length;
+                document.getElementById('avg-total').textContent = average.toFixed(2);
+                document.getElementById('avg-total').classList.add('text-rose-700');
+
+                const resultBox = document.getElementById('avg-result');
+                resultBox.classList.remove('hidden');
+                resultBox.innerHTML = `
+                    <h3 class="text-lg sm:text-xl font-bold mb-2">✅ Average Rating: ${average.toFixed(2)}</h3>
+                    <p class="text-sm sm:text-base">Formula =AVERAGE(B2:B6) calculated the mean of all ratings!</p>
+                    <p class="text-sm sm:text-base mt-2">⭐ Formula: (4.5+3.8+4.2+4.7+3.9) / 5 = ${average.toFixed(2)}</p>
+                `;
+
+                setTimeout(() => {
+                    cells.forEach(cell => cell.classList.remove('selected', 'bg-rose-200'));
+                }, 2000);
+            }, 1800);
         }
     </script>
 
