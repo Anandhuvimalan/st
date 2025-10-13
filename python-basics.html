@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Programming Basics - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #306998 0%, #FFD43B 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            color: #fff;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        nav a:hover {
+            background: #34495e;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            scroll-margin-top: 70px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #306998;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #FFD43B;
+        }
+
+        h4 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border-left: 4px solid #FFD43B;
+        }
+
+        .code-comment {
+            color: #75715e;
+        }
+
+        .code-keyword {
+            color: #f92672;
+        }
+
+        .code-string {
+            color: #e6db74;
+        }
+
+        .code-number {
+            color: #ae81ff;
+        }
+
+        .code-function {
+            color: #a6e22e;
+        }
+
+        .output-block {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            border-left: 4px solid #0f0;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box h4 {
+            color: #1976D2;
+            margin-top: 0;
+        }
+
+        .info-box p, .info-box ul {
+            color: #333;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .warning-box p {
+            color: #856404;
+            margin-bottom: 0;
+        }
+
+        .tip-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        .tip-box p, .tip-box ul {
+            color: #155724;
+        }
+
+        .flow-diagram {
+            background: white;
+            border: 2px solid #306998;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #306998 0%, #FFD43B 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: #306998;
+            margin: 0 10px;
+        }
+
+        .data-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .data-type-card {
+            background: linear-gradient(135deg, #306998 0%, #2c5a8a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .data-type-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .data-type-card h4 {
+            color: #FFD43B;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .data-type-card p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .data-type-card code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-table th {
+            background: #306998;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .method-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+
+        .method-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .method-table code {
+            background: #e8f4f8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #306998;
+            font-weight: bold;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        ul li, ol li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+
+        .comparison-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .data-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .flow-arrow {
+                display: block;
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Python Programming Basics</h1>
+            <p>Complete Guide to Python Fundamentals</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#variables">Variables</a></li>
+                <li><a href="#data-types">Data Types</a></li>
+                <li><a href="#control-flow">Control Flow</a></li>
+                <li><a href="#loops">Loops</a></li>
+                <li><a href="#data-structures">Data Structures</a></li>
+                <li><a href="#functions">Functions</a></li>
+                <li><a href="#advanced">Advanced Topics</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="intro">
+                <h2>What is Python Programming?</h2>
+                <p>Python is a high-level, interpreted, general-purpose programming language that emphasizes code readability and simplicity. Created by Guido van Rossum and first released in 1991, Python has become one of the most popular programming languages in the world.</p>
+
+                <h3>Key Features of Python</h3>
+                <div class="data-type-grid">
+                    <div class="data-type-card">
+                        <h4>Easy to Learn</h4>
+                        <p>Simple, English-like syntax that makes it perfect for beginners while remaining powerful for experts.</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Interpreted Language</h4>
+                        <p>Code is executed line by line, making debugging easier and development faster.</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Dynamically Typed</h4>
+                        <p>No need to declare variable types explicitly. Python figures it out automatically.</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Versatile</h4>
+                        <p>Used for web development, data science, AI/ML, automation, scripting, and more.</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Extensive Libraries</h4>
+                        <p>Rich ecosystem with libraries for almost any task - from NumPy to Django to TensorFlow.</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Cross-Platform</h4>
+                        <p>Write once, run anywhere - Windows, Mac, Linux, and more.</p>
+                    </div>
+                </div>
+
+                <h3>Why Learn Python?</h3>
+                <ul>
+                    <li><strong>Beginner-Friendly:</strong> Clean syntax and readability make it ideal for learning programming concepts</li>
+                    <li><strong>In-Demand Skill:</strong> High demand in job markets across multiple industries</li>
+                    <li><strong>Data Science & AI:</strong> The language of choice for data analysis, machine learning, and artificial intelligence</li>
+                    <li><strong>Web Development:</strong> Powerful frameworks like Django and Flask for building web applications</li>
+                    <li><strong>Automation:</strong> Automate repetitive tasks and build scripts easily</li>
+                    <li><strong>Large Community:</strong> Massive community support with extensive documentation and resources</li>
+                </ul>
+            </section>
+
+            <section id="how-it-works">
+                <h2>How Python Works</h2>
+                <p>Understanding how Python executes your code is crucial for writing efficient programs. Python follows a multi-step compilation and execution process:</p>
+
+                <div class="flow-diagram">
+                    <div class="flow-step">Source Code (.py)</div>
+                    <span class="flow-arrow">↓</span>
+                    <div class="flow-step">Lexing/Tokenization</div>
+                    <span class="flow-arrow">↓</span>
+                    <div class="flow-step">Parsing (AST)</div>
+                    <span class="flow-arrow">↓</span>
+                    <div class="flow-step">Bytecode (.pyc)</div>
+                    <span class="flow-arrow">↓</span>
+                    <div class="flow-step">Python Virtual Machine (PVM)</div>
+                    <span class="flow-arrow">↓</span>
+                    <div class="flow-step">Machine Code Execution</div>
+                </div>
+
+                <h3>Step 1: Source Code</h3>
+                <p>You write Python code in a <code>.py</code> file using plain text. This is human-readable code that follows Python's syntax rules.</p>
+                <div class="code-block">
+# example.py
+print("Hello, World!")
+x = 10
+y = 20
+print(x + y)
+                </div>
+
+                <h3>Step 2: Lexing (Tokenization)</h3>
+                <p>The lexical analyzer (lexer) breaks down your source code into tokens - the smallest meaningful units like keywords, identifiers, operators, and literals.</p>
+                <div class="info-box">
+                    <h4>Example Tokenization</h4>
+                    <p><code>x = 10 + 20</code> becomes:</p>
+                    <ul>
+                        <li><strong>IDENTIFIER:</strong> x</li>
+                        <li><strong>OPERATOR:</strong> =</li>
+                        <li><strong>NUMBER:</strong> 10</li>
+                        <li><strong>OPERATOR:</strong> +</li>
+                        <li><strong>NUMBER:</strong> 20</li>
+                    </ul>
+                </div>
+
+                <h3>Step 3: Parsing - Abstract Syntax Tree (AST)</h3>
+                <p>The parser takes tokens and creates an Abstract Syntax Tree (AST) - a tree representation of the grammatical structure of your code. This verifies that your code follows Python's syntax rules.</p>
+                <div class="info-box">
+                    <h4>AST Structure</h4>
+                    <p>The AST represents the hierarchical structure of your code, showing relationships between different code elements like assignments, function calls, and expressions.</p>
+                </div>
+
+                <h3>Step 4: Bytecode Compilation</h3>
+                <p>Python compiles the AST into bytecode - a lower-level, platform-independent representation that Python's virtual machine can execute. This bytecode is stored in <code>.pyc</code> files in the <code>__pycache__</code> directory.</p>
+                <div class="tip-box">
+                    <h4>Why Bytecode?</h4>
+                    <ul>
+                        <li>Faster execution on subsequent runs (no need to recompile)</li>
+                        <li>Platform-independent intermediate format</li>
+                        <li>Easier for the Python Virtual Machine to interpret</li>
+                    </ul>
+                </div>
+
+                <h3>Step 5: Python Virtual Machine (PVM)</h3>
+                <p>The PVM is the runtime engine of Python. It reads the bytecode instructions one by one and executes them. This is why Python is called an "interpreted" language - the bytecode is interpreted by the PVM.</p>
+
+                <h3>Step 6: Machine Code Execution</h3>
+                <p>The PVM translates bytecode instructions into machine code that your computer's processor can execute. This happens dynamically at runtime.</p>
+
+                <div class="warning-box">
+                    <h4>Interpreted vs Compiled</h4>
+                    <p>Python is technically both compiled (to bytecode) and interpreted (bytecode by PVM). This hybrid approach provides flexibility and portability while maintaining reasonable performance.</p>
+                </div>
+            </section>
+
+            <section id="variables">
+                <h2>Variables in Python</h2>
+                <p>Variables are containers for storing data values. In Python, you don't need to declare a variable's type - Python automatically determines it based on the value assigned.</p>
+
+                <h3>Creating Variables</h3>
+                <div class="code-block">
+# Creating variables
+name = "John"           # String variable
+age = 25                # Integer variable
+height = 5.9            # Float variable
+is_student = True       # Boolean variable
+
+# Python determines the type automatically
+x = 10                  # x is an integer
+x = "Hello"            # Now x is a string (dynamic typing)
+                </div>
+
+                <h3>Variable Naming Conventions</h3>
+                <p>Python has specific rules and conventions for naming variables:</p>
+
+                <h4>Rules (Must Follow)</h4>
+                <ul>
+                    <li>Must start with a letter (a-z, A-Z) or underscore (_)</li>
+                    <li>Cannot start with a number</li>
+                    <li>Can only contain alphanumeric characters and underscores (A-z, 0-9, _)</li>
+                    <li>Variable names are case-sensitive (age, Age, and AGE are different variables)</li>
+                    <li>Cannot use Python keywords (if, for, while, class, etc.)</li>
+                </ul>
+
+                <h4>Conventions (Best Practices)</h4>
+                <div class="code-block">
+# Good variable names (snake_case for variables)
+user_name = "Alice"
+total_price = 99.99
+is_valid = True
+first_name = "John"
+age_in_years = 30
+
+# Constants (ALL_CAPS)
+MAX_SIZE = 100
+PI = 3.14159
+DATABASE_URL = "localhost:5432"
+
+# Class names (PascalCase)
+class UserAccount:
+    pass
+
+# Private variables (leading underscore)
+_internal_value = 42
+__private_var = "secret"
+
+# Bad variable names (avoid)
+x = 10                  # Not descriptive
+myVariable = 20         # camelCase (not Pythonic)
+my-variable = 30        # Error: hyphens not allowed
+2nd_value = 40          # Error: starts with number
+                </div>
+
+                <h3>Variable Types</h3>
+                <div class="info-box">
+                    <h4>Python Variable Types</h4>
+                    <ul>
+                        <li><strong>Local Variables:</strong> Defined inside a function, only accessible within that function</li>
+                        <li><strong>Global Variables:</strong> Defined outside functions, accessible throughout the program</li>
+                        <li><strong>Instance Variables:</strong> Belong to an object instance in classes</li>
+                        <li><strong>Class Variables:</strong> Shared among all instances of a class</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+# Global variable
+global_var = "I'm global"
+
+def my_function():
+    # Local variable
+    local_var = "I'm local"
+    print(global_var)    # Can access global
+    print(local_var)     # Can access local
+
+my_function()
+# print(local_var)      # Error: local_var not accessible here
+                </div>
+
+                <h3>Multiple Assignment</h3>
+                <div class="code-block">
+# Assign multiple variables in one line
+x, y, z = 10, 20, 30
+print(x, y, z)          # Output: 10 20 30
+
+# Assign same value to multiple variables
+a = b = c = 100
+print(a, b, c)          # Output: 100 100 100
+
+# Swap variables
+x, y = 5, 10
+x, y = y, x             # Swap values
+print(x, y)             # Output: 10 5
+                </div>
+            </section>
+
+            <section id="data-types">
+                <h2>Data Types in Python</h2>
+                <p>Python has several built-in data types that store different kinds of values. Python automatically determines the data type based on the value assigned.</p>
+
+                <h3>Built-in Data Types</h3>
+                <div class="data-type-grid">
+                    <div class="data-type-card">
+                        <h4>Text Type</h4>
+                        <p><strong>str</strong> - String type for text</p>
+                        <code>"Hello World"</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Numeric Types</h4>
+                        <p><strong>int</strong> - Integer numbers</p>
+                        <p><strong>float</strong> - Decimal numbers</p>
+                        <p><strong>complex</strong> - Complex numbers</p>
+                        <code>42, 3.14, 3+4j</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Sequence Types</h4>
+                        <p><strong>list</strong> - Ordered, mutable</p>
+                        <p><strong>tuple</strong> - Ordered, immutable</p>
+                        <p><strong>range</strong> - Sequence of numbers</p>
+                        <code>[1,2,3], (1,2,3)</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Mapping Type</h4>
+                        <p><strong>dict</strong> - Key-value pairs</p>
+                        <code>{"name": "John"}</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Set Types</h4>
+                        <p><strong>set</strong> - Unordered, unique items</p>
+                        <p><strong>frozenset</strong> - Immutable set</p>
+                        <code>{1, 2, 3}</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Boolean Type</h4>
+                        <p><strong>bool</strong> - True or False</p>
+                        <code>True, False</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>Binary Types</h4>
+                        <p><strong>bytes</strong> - Immutable bytes</p>
+                        <p><strong>bytearray</strong> - Mutable bytes</p>
+                        <code>b"Hello"</code>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>None Type</h4>
+                        <p><strong>NoneType</strong> - Represents null</p>
+                        <code>None</code>
+                    </div>
+                </div>
+
+                <h3>Data Type Examples</h3>
+                <div class="code-block">
+# String
+name = "Alice"
+message = 'Hello World'
+multiline = """This is a
+multiline string"""
+
+# Integer
+age = 25
+negative = -100
+large_num = 1_000_000  # Underscores for readability
+
+# Float
+price = 19.99
+scientific = 3.5e4     # 35000.0
+
+# Complex
+complex_num = 3 + 4j
+
+# Boolean
+is_active = True
+is_valid = False
+
+# None
+result = None
+                </div>
+
+                <h3>The type() Function</h3>
+                <p>Use the <code>type()</code> function to check the data type of any variable:</p>
+                <div class="code-block">
+# Using type() function
+x = 10
+print(type(x))          # &lt;class 'int'&gt;
+
+y = 10.5
+print(type(y))          # &lt;class 'float'&gt;
+
+name = "John"
+print(type(name))       # &lt;class 'str'&gt;
+
+is_valid = True
+print(type(is_valid))   # &lt;class 'bool'&gt;
+
+my_list = [1, 2, 3]
+print(type(my_list))    # &lt;class 'list'&gt;
+
+my_dict = {"key": "value"}
+print(type(my_dict))    # &lt;class 'dict'&gt;
+                </div>
+
+                <div class="output-block">
+&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;
+&lt;class 'list'&gt;
+&lt;class 'dict'&gt;
+                </div>
+
+                <h3>Type Conversion (Casting)</h3>
+                <div class="code-block">
+# Converting between types
+x = "10"                # String
+y = int(x)              # Convert to integer: 10
+z = float(x)            # Convert to float: 10.0
+
+a = 10.7
+b = int(a)              # Convert to integer: 10 (truncates)
+c = str(a)              # Convert to string: "10.7"
+
+# Boolean conversion
+bool(1)                 # True
+bool(0)                 # False
+bool("")                # False (empty string)
+bool("Hello")           # True
+bool([])                # False (empty list)
+bool([1, 2])            # True
+                </div>
+            </section>
+
+            <section id="control-flow">
+                <h2>Control Flow - if, elif, else</h2>
+                <p>Control flow statements allow you to execute different code blocks based on conditions. Python uses indentation (4 spaces) to define code blocks.</p>
+
+                <h3>The if Statement</h3>
+                <p>Executes a block of code if the condition is True:</p>
+                <div class="code-block">
+# Simple if statement
+age = 18
+
+if age >= 18:
+    print("You are an adult")
+    print("You can vote")
+                </div>
+                <div class="output-block">
+You are an adult
+You can vote
+                </div>
+
+                <h3>The if-else Statement</h3>
+                <p>Executes one block if condition is True, another if False:</p>
+                <div class="code-block">
+# if-else statement
+temperature = 25
+
+if temperature > 30:
+    print("It's hot outside!")
+else:
+    print("The weather is pleasant")
+                </div>
+                <div class="output-block">
+The weather is pleasant
+                </div>
+
+                <h3>The if-elif-else Statement</h3>
+                <p>Test multiple conditions in sequence:</p>
+                <div class="code-block">
+# if-elif-else statement
+score = 85
+
+if score >= 90:
+    grade = "A"
+    print("Excellent!")
+elif score >= 80:
+    grade = "B"
+    print("Very Good!")
+elif score >= 70:
+    grade = "C"
+    print("Good!")
+elif score >= 60:
+    grade = "D"
+    print("Satisfactory")
+else:
+    grade = "F"
+    print("Needs Improvement")
+
+print(f"Your grade is: {grade}")
+                </div>
+                <div class="output-block">
+Very Good!
+Your grade is: B
+                </div>
+
+                <h3>Nested if Statements</h3>
+                <div class="code-block">
+# Nested if statements
+age = 20
+has_license = True
+
+if age >= 18:
+    print("You are old enough to drive")
+    if has_license:
+        print("You can drive!")
+    else:
+        print("But you need a license first")
+else:
+    print("You are too young to drive")
+                </div>
+                <div class="output-block">
+You are old enough to drive
+You can drive!
+                </div>
+
+                <h3>Comparison Operators</h3>
+                <table class="method-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>==</code></td>
+                            <td>Equal to</td>
+                            <td><code>x == y</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>!=</code></td>
+                            <td>Not equal to</td>
+                            <td><code>x != y</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;</code></td>
+                            <td>Greater than</td>
+                            <td><code>x &gt; y</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;</code></td>
+                            <td>Less than</td>
+                            <td><code>x &lt; y</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;=</code></td>
+                            <td>Greater than or equal to</td>
+                            <td><code>x &gt;= y</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;=</code></td>
+                            <td>Less than or equal to</td>
+                            <td><code>x &lt;= y</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Logical Operators</h3>
+                <div class="code-block">
+# and operator - both conditions must be True
+age = 25
+income = 50000
+
+if age >= 18 and income >= 30000:
+    print("Loan approved")
+
+# or operator - at least one condition must be True
+has_degree = True
+has_experience = False
+
+if has_degree or has_experience:
+    print("Eligible for interview")
+
+# not operator - reverses the boolean value
+is_raining = False
+
+if not is_raining:
+    print("Let's go for a walk!")
+                </div>
+
+                <h3>Short-hand if-else (Ternary Operator)</h3>
+                <div class="code-block">
+# Ternary operator
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)           # Output: Adult
+
+# One-line if statement
+x = 10
+if x > 5: print("x is greater than 5")
+
+# Multiple statements on one line (not recommended)
+if x > 5: print("Greater"); print("Than 5")
+                </div>
+            </section>
+
+            <section id="loops">
+                <h2>Loops in Python</h2>
+                <p>Loops are used to repeat a block of code multiple times. Python has two types of loops: <strong>for</strong> loops and <strong>while</strong> loops.</p>
+
+                <h3>The for Loop</h3>
+                <p>Used to iterate over a sequence (list, tuple, string, range, etc.):</p>
+                <div class="code-block">
+# Looping through a list
+fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(fruit)
+                </div>
+                <div class="output-block">
+apple
+banana
+cherry
+                </div>
+
+                <h4>Using range() with for Loop</h4>
+                <div class="code-block">
+# range(stop) - from 0 to stop-1
+for i in range(5):
+    print(i)            # Output: 0 1 2 3 4
+
+# range(start, stop) - from start to stop-1
+for i in range(2, 6):
+    print(i)            # Output: 2 3 4 5
+
+# range(start, stop, step) - with custom step
+for i in range(0, 10, 2):
+    print(i)            # Output: 0 2 4 6 8
+
+# Counting backwards
+for i in range(10, 0, -1):
+    print(i)            # Output: 10 9 8 7 6 5 4 3 2 1
+                </div>
+
+                <h4>Looping Through Strings</h4>
+                <div class="code-block">
+# Iterate through each character
+message = "Python"
+
+for char in message:
+    print(char)
+                </div>
+                <div class="output-block">
+P
+y
+t
+h
+o
+n
+                </div>
+
+                <h4>enumerate() Function</h4>
+                <div class="code-block">
+# Get both index and value
+fruits = ["apple", "banana", "cherry"]
+
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+                </div>
+                <div class="output-block">
+0: apple
+1: banana
+2: cherry
+                </div>
+
+                <h4>Nested for Loops</h4>
+                <div class="code-block">
+# Nested loops - multiplication table
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f"{i} x {j} = {i*j}")
+    print("---")
+                </div>
+
+                <h3>The while Loop</h3>
+                <p>Executes a block of code as long as the condition is True:</p>
+                <div class="code-block">
+# Basic while loop
+count = 0
+
+while count < 5:
+    print(f"Count is: {count}")
+    count += 1          # Increment count
+
+print("Loop finished!")
+                </div>
+                <div class="output-block">
+Count is: 0
+Count is: 1
+Count is: 2
+Count is: 3
+Count is: 4
+Loop finished!
+                </div>
+
+                <h4>while Loop with User Input</h4>
+                <div class="code-block">
+# Keep asking until valid input
+password = ""
+
+while password != "python123":
+    password = input("Enter password: ")
+    if password != "python123":
+        print("Incorrect password. Try again.")
+
+print("Access granted!")
+                </div>
+
+                <h4>Infinite Loop (with break)</h4>
+                <div class="code-block">
+# Infinite loop - be careful!
+counter = 0
+
+while True:
+    print(f"Iteration {counter}")
+    counter += 1
+
+    if counter >= 5:
+        break           # Exit the loop
+                </div>
+
+                <h3>Loop Control Statements</h3>
+
+                <h4>break Statement</h4>
+                <p>Exits the loop immediately:</p>
+                <div class="code-block">
+# break - exit loop early
+for i in range(10):
+    if i == 5:
+        break           # Exit when i is 5
+    print(i)
+
+# Output: 0 1 2 3 4
+                </div>
+
+                <h4>continue Statement</h4>
+                <p>Skips the current iteration and moves to the next:</p>
+                <div class="code-block">
+# continue - skip current iteration
+for i in range(10):
+    if i % 2 == 0:
+        continue        # Skip even numbers
+    print(i)
+
+# Output: 1 3 5 7 9
+                </div>
+
+                <h4>else Clause with Loops</h4>
+                <p>The else block executes when loop completes normally (not broken by break):</p>
+                <div class="code-block">
+# else with for loop
+for i in range(5):
+    print(i)
+else:
+    print("Loop completed successfully!")
+
+# else with while loop
+count = 0
+while count < 3:
+    print(count)
+    count += 1
+else:
+    print("While loop finished!")
+
+# else doesn't execute if loop is broken
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+else:
+    print("This won't print")  # Skipped because of break
+                </div>
+
+                <h4>pass Statement</h4>
+                <p>Does nothing - used as a placeholder:</p>
+                <div class="code-block">
+# pass - placeholder for future code
+for i in range(5):
+    if i == 3:
+        pass            # Do nothing, continue loop
+    else:
+        print(i)
+                </div>
+
+                <h3>Loop Examples</h3>
+                <div class="code-block">
+# Example 1: Sum of numbers
+total = 0
+for i in range(1, 11):
+    total += i
+print(f"Sum of 1 to 10: {total}")  # Output: 55
+
+# Example 2: Factorial
+n = 5
+factorial = 1
+for i in range(1, n + 1):
+    factorial *= i
+print(f"{n}! = {factorial}")        # Output: 5! = 120
+
+# Example 3: Find prime numbers
+for num in range(2, 20):
+    is_prime = True
+    for i in range(2, num):
+        if num % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        print(num, end=" ")         # Output: 2 3 5 7 11 13 17 19
+                </div>
+            </section>
+
+            <section id="data-structures">
+                <h2>Data Structures in Python</h2>
+                <p>Python provides four main built-in data structures for storing collections of data: Lists, Tuples, Sets, and Dictionaries.</p>
+
+                <h3>Lists</h3>
+                <p>Lists are ordered, mutable (changeable) collections that allow duplicate elements. Created using square brackets <code>[]</code>.</p>
+
+                <div class="code-block">
+# Creating lists
+fruits = ["apple", "banana", "cherry"]
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, "hello", 3.14, True]
+empty_list = []
+nested = [[1, 2], [3, 4], [5, 6]]
+
+# Accessing elements
+print(fruits[0])        # apple (first element)
+print(fruits[-1])       # cherry (last element)
+print(fruits[1:3])      # ['banana', 'cherry'] (slicing)
+
+# Modifying lists
+fruits[1] = "blueberry"
+print(fruits)           # ['apple', 'blueberry', 'cherry']
+
+# Adding elements
+fruits.append("date")   # Add to end
+fruits.insert(1, "banana")  # Insert at index 1
+
+# Removing elements
+fruits.remove("apple")  # Remove by value
+popped = fruits.pop()   # Remove and return last item
+del fruits[0]           # Delete by index
+                </div>
+
+                <h4>List Methods</h4>
+                <table class="method-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>append(x)</code></td>
+                            <td>Add item to end</td>
+                            <td><code>list.append(5)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>insert(i, x)</code></td>
+                            <td>Insert item at index</td>
+                            <td><code>list.insert(0, "first")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>remove(x)</code></td>
+                            <td>Remove first occurrence</td>
+                            <td><code>list.remove("apple")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pop([i])</code></td>
+                            <td>Remove and return item</td>
+                            <td><code>list.pop()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>clear()</code></td>
+                            <td>Remove all items</td>
+                            <td><code>list.clear()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>index(x)</code></td>
+                            <td>Find index of item</td>
+                            <td><code>list.index("apple")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>count(x)</code></td>
+                            <td>Count occurrences</td>
+                            <td><code>list.count(5)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>sort()</code></td>
+                            <td>Sort list in place</td>
+                            <td><code>list.sort()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>reverse()</code></td>
+                            <td>Reverse list in place</td>
+                            <td><code>list.reverse()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>copy()</code></td>
+                            <td>Create shallow copy</td>
+                            <td><code>new = list.copy()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>extend(iterable)</code></td>
+                            <td>Add all items from iterable</td>
+                            <td><code>list.extend([1,2,3])</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>List Examples</h4>
+                <div class="code-block">
+# List operations
+numbers = [3, 1, 4, 1, 5, 9, 2]
+
+# Sorting
+numbers.sort()
+print(numbers)          # [1, 1, 2, 3, 4, 5, 9]
+
+# Sorting in reverse
+numbers.sort(reverse=True)
+print(numbers)          # [9, 5, 4, 3, 2, 1, 1]
+
+# Using sorted() - returns new list
+original = [3, 1, 4]
+sorted_list = sorted(original)
+print(original)         # [3, 1, 4] (unchanged)
+print(sorted_list)      # [1, 3, 4]
+
+# List comprehension
+squares = [x**2 for x in range(1, 6)]
+print(squares)          # [1, 4, 9, 16, 25]
+
+# Filter with list comprehension
+evens = [x for x in range(10) if x % 2 == 0]
+print(evens)            # [0, 2, 4, 6, 8]
+
+# Check membership
+fruits = ["apple", "banana", "cherry"]
+print("apple" in fruits)        # True
+print("grape" in fruits)        # False
+
+# Length and other operations
+print(len(fruits))              # 3
+print(max([1, 5, 3, 9, 2]))    # 9
+print(min([1, 5, 3, 9, 2]))    # 1
+print(sum([1, 2, 3, 4, 5]))    # 15
+                </div>
+
+                <h3>Tuples</h3>
+                <p>Tuples are ordered, immutable (unchangeable) collections that allow duplicate elements. Created using parentheses <code>()</code>.</p>
+
+                <div class="code-block">
+# Creating tuples
+fruits = ("apple", "banana", "cherry")
+numbers = (1, 2, 3, 4, 5)
+mixed = (1, "hello", 3.14, True)
+single = (1,)           # Single element tuple (comma required)
+empty_tuple = ()
+
+# Accessing elements (same as lists)
+print(fruits[0])        # apple
+print(fruits[-1])       # cherry
+print(fruits[1:3])      # ('banana', 'cherry')
+
+# Tuples are immutable
+# fruits[0] = "grape"   # Error: Cannot modify tuple
+
+# But you can create a new tuple
+new_fruits = fruits + ("date", "elderberry")
+print(new_fruits)       # ('apple', 'banana', 'cherry', 'date', 'elderberry')
+                </div>
+
+                <h4>Tuple Methods</h4>
+                <table class="method-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>count(x)</code></td>
+                            <td>Count occurrences of value</td>
+                            <td><code>tuple.count(5)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>index(x)</code></td>
+                            <td>Find index of first occurrence</td>
+                            <td><code>tuple.index("apple")</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <h4>Why Use Tuples?</h4>
+                    <ul>
+                        <li><strong>Immutability:</strong> Data cannot be accidentally changed</li>
+                        <li><strong>Performance:</strong> Tuples are faster than lists</li>
+                        <li><strong>Dictionary Keys:</strong> Tuples can be used as dictionary keys (lists cannot)</li>
+                        <li><strong>Data Integrity:</strong> Protect data that shouldn't change</li>
+                    </ul>
+                </div>
+
+                <h3>Sets</h3>
+                <p>Sets are unordered collections of unique elements (no duplicates). Created using curly braces <code>{}</code>.</p>
+
+                <div class="code-block">
+# Creating sets
+fruits = {"apple", "banana", "cherry"}
+numbers = {1, 2, 3, 4, 5}
+empty_set = set()       # Note: {} creates empty dict, not set
+
+# Duplicates are automatically removed
+numbers = {1, 2, 2, 3, 3, 3, 4}
+print(numbers)          # {1, 2, 3, 4}
+
+# Adding elements
+fruits.add("date")
+fruits.update(["elderberry", "fig"])
+
+# Removing elements
+fruits.remove("apple")      # Error if not found
+fruits.discard("banana")    # No error if not found
+popped = fruits.pop()       # Remove and return random item
+
+# Set operations
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+# Union - all elements from both sets
+print(a | b)            # {1, 2, 3, 4, 5, 6}
+print(a.union(b))       # {1, 2, 3, 4, 5, 6}
+
+# Intersection - common elements
+print(a & b)            # {3, 4}
+print(a.intersection(b))  # {3, 4}
+
+# Difference - elements in a but not in b
+print(a - b)            # {1, 2}
+print(a.difference(b))  # {1, 2}
+
+# Symmetric difference - elements in either but not both
+print(a ^ b)            # {1, 2, 5, 6}
+print(a.symmetric_difference(b))  # {1, 2, 5, 6}
+                </div>
+
+                <h4>Set Methods</h4>
+                <table class="method-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>add(x)</code></td>
+                            <td>Add an element</td>
+                            <td><code>set.add(5)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>remove(x)</code></td>
+                            <td>Remove element (error if not found)</td>
+                            <td><code>set.remove("apple")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>discard(x)</code></td>
+                            <td>Remove element (no error)</td>
+                            <td><code>set.discard("apple")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pop()</code></td>
+                            <td>Remove and return random element</td>
+                            <td><code>set.pop()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>clear()</code></td>
+                            <td>Remove all elements</td>
+                            <td><code>set.clear()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>union()</code></td>
+                            <td>Return union of sets</td>
+                            <td><code>a.union(b)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>intersection()</code></td>
+                            <td>Return common elements</td>
+                            <td><code>a.intersection(b)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>difference()</code></td>
+                            <td>Return difference</td>
+                            <td><code>a.difference(b)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>issubset()</code></td>
+                            <td>Check if subset</td>
+                            <td><code>a.issubset(b)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>issuperset()</code></td>
+                            <td>Check if superset</td>
+                            <td><code>a.issuperset(b)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Dictionaries</h3>
+                <p>Dictionaries store data in key-value pairs. Keys must be unique and immutable. Created using curly braces <code>{}</code> with key:value pairs.</p>
+
+                <div class="code-block">
+# Creating dictionaries
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+# Empty dictionary
+empty_dict = {}
+
+# Accessing values
+print(person["name"])       # John
+print(person.get("age"))    # 30
+print(person.get("country", "USA"))  # USA (default if not found)
+
+# Modifying values
+person["age"] = 31
+person["country"] = "USA"   # Add new key-value pair
+
+# Removing items
+del person["city"]
+age = person.pop("age")     # Remove and return value
+person.clear()              # Remove all items
+
+# Dictionary methods
+student = {
+    "name": "Alice",
+    "age": 22,
+    "grade": "A"
+}
+
+# Get all keys
+print(student.keys())       # dict_keys(['name', 'age', 'grade'])
+
+# Get all values
+print(student.values())     # dict_values(['Alice', 22, 'A'])
+
+# Get all key-value pairs
+print(student.items())      # dict_items([('name', 'Alice'), ('age', 22), ('grade', 'A')])
+
+# Looping through dictionary
+for key in student:
+    print(f"{key}: {student[key]}")
+
+for key, value in student.items():
+    print(f"{key}: {value}")
+
+# Check if key exists
+if "name" in student:
+    print("Name exists")
+                </div>
+
+                <h4>Dictionary Methods</h4>
+                <table class="method-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>get(key, default)</code></td>
+                            <td>Get value by key</td>
+                            <td><code>dict.get("name", "Unknown")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>keys()</code></td>
+                            <td>Return all keys</td>
+                            <td><code>dict.keys()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>values()</code></td>
+                            <td>Return all values</td>
+                            <td><code>dict.values()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>items()</code></td>
+                            <td>Return key-value pairs</td>
+                            <td><code>dict.items()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pop(key)</code></td>
+                            <td>Remove and return value</td>
+                            <td><code>dict.pop("age")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>popitem()</code></td>
+                            <td>Remove and return last pair</td>
+                            <td><code>dict.popitem()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>update(dict2)</code></td>
+                            <td>Update with another dict</td>
+                            <td><code>dict.update({"age": 30})</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>clear()</code></td>
+                            <td>Remove all items</td>
+                            <td><code>dict.clear()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>copy()</code></td>
+                            <td>Create shallow copy</td>
+                            <td><code>new = dict.copy()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>setdefault(key, default)</code></td>
+                            <td>Get value or set default</td>
+                            <td><code>dict.setdefault("age", 25)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Dictionary Examples</h4>
+                <div class="code-block">
+# Nested dictionaries
+employees = {
+    "emp1": {"name": "John", "age": 30, "dept": "IT"},
+    "emp2": {"name": "Alice", "age": 25, "dept": "HR"},
+    "emp3": {"name": "Bob", "age": 35, "dept": "Finance"}
+}
+
+print(employees["emp1"]["name"])  # John
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(1, 6)}
+print(squares)          # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Counting with dictionary
+text = "hello world"
+char_count = {}
+for char in text:
+    if char in char_count:
+        char_count[char] += 1
+    else:
+        char_count[char] = 1
+print(char_count)       # {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
+
+# Better way using get()
+char_count = {}
+for char in text:
+    char_count[char] = char_count.get(char, 0) + 1
+                </div>
+
+                <h3>Comparison of Data Structures</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>List</th>
+                            <th>Tuple</th>
+                            <th>Set</th>
+                            <th>Dictionary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Syntax</strong></td>
+                            <td><code>[1, 2, 3]</code></td>
+                            <td><code>(1, 2, 3)</code></td>
+                            <td><code>{1, 2, 3}</code></td>
+                            <td><code>{"a": 1}</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ordered</strong></td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                            <td>Yes (3.7+)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mutable</strong></td>
+                            <td>Yes</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duplicates</strong></td>
+                            <td>Allowed</td>
+                            <td>Allowed</td>
+                            <td>Not Allowed</td>
+                            <td>Keys: No, Values: Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Indexing</strong></td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                            <td>By key</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Use Case</strong></td>
+                            <td>General collections</td>
+                            <td>Immutable data</td>
+                            <td>Unique items, math ops</td>
+                            <td>Key-value mapping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="functions">
+                <h2>Functions in Python</h2>
+                <p>Functions are reusable blocks of code that perform a specific task. They help organize code, improve readability, and reduce repetition.</p>
+
+                <h3>Defining Functions</h3>
+                <div class="code-block">
+# Basic function
+def greet():
+    print("Hello, World!")
+
+# Calling the function
+greet()                 # Output: Hello, World!
+
+# Function with parameters
+def greet_person(name):
+    print(f"Hello, {name}!")
+
+greet_person("Alice")   # Output: Hello, Alice!
+greet_person("Bob")     # Output: Hello, Bob!
+
+# Function with return value
+def add(a, b):
+    result = a + b
+    return result
+
+sum_result = add(5, 3)
+print(sum_result)       # Output: 8
+
+# Function with multiple return values
+def get_name_age():
+    name = "John"
+    age = 30
+    return name, age    # Returns tuple
+
+name, age = get_name_age()
+print(name, age)        # Output: John 30
+                </div>
+
+                <h3>Parameters and Arguments</h3>
+
+                <h4>Positional Arguments</h4>
+                <div class="code-block">
+# Arguments passed by position
+def introduce(name, age, city):
+    print(f"I'm {name}, {age} years old, from {city}")
+
+introduce("Alice", 25, "New York")
+# Output: I'm Alice, 25 years old, from New York
+                </div>
+
+                <h4>Keyword Arguments</h4>
+                <div class="code-block">
+# Arguments passed by name
+def introduce(name, age, city):
+    print(f"I'm {name}, {age} years old, from {city}")
+
+introduce(age=25, city="New York", name="Alice")
+# Output: I'm Alice, 25 years old, from New York
+
+# Mix positional and keyword (positional first)
+introduce("Bob", city="London", age=30)
+                </div>
+
+                <h4>Default Parameters</h4>
+                <div class="code-block">
+# Default parameter values
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Alice")              # Hello, Alice!
+greet("Bob", "Hi")          # Hi, Bob!
+greet("Charlie", greeting="Hey")  # Hey, Charlie!
+                </div>
+
+                <h4>Variable-Length Arguments (*args)</h4>
+                <div class="code-block">
+# *args - accepts any number of positional arguments
+def sum_all(*numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3))         # 6
+print(sum_all(1, 2, 3, 4, 5))   # 15
+print(sum_all(10, 20))          # 30
+
+# *args creates a tuple
+def print_args(*args):
+    print(type(args))           # &lt;class 'tuple'&gt;
+    print(args)
+
+print_args(1, 2, 3, "hello")    # (1, 2, 3, 'hello')
+                </div>
+
+                <h4>Keyword Variable-Length Arguments (**kwargs)</h4>
+                <div class="code-block">
+# **kwargs - accepts any number of keyword arguments
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Alice", age=25, city="New York")
+# Output:
+# name: Alice
+# age: 25
+# city: New York
+
+# **kwargs creates a dictionary
+def show_kwargs(**kwargs):
+    print(type(kwargs))         # &lt;class 'dict'&gt;
+    print(kwargs)
+
+show_kwargs(a=1, b=2, c=3)      # {'a': 1, 'b': 2, 'c': 3}
+                </div>
+
+                <h4>Combining Different Parameter Types</h4>
+                <div class="code-block">
+# Order: positional, *args, default, **kwargs
+def complex_function(pos1, pos2, *args, default="value", **kwargs):
+    print(f"Positional: {pos1}, {pos2}")
+    print(f"Args: {args}")
+    print(f"Default: {default}")
+    print(f"Kwargs: {kwargs}")
+
+complex_function(1, 2, 3, 4, 5, default="custom", key1="val1", key2="val2")
+# Output:
+# Positional: 1, 2
+# Args: (3, 4, 5)
+# Default: custom
+# Kwargs: {'key1': 'val1', 'key2': 'val2'}
+                </div>
+
+                <h3>Lambda Functions</h3>
+                <p>Lambda functions are small anonymous functions defined with the <code>lambda</code> keyword:</p>
+                <div class="code-block">
+# Regular function
+def square(x):
+    return x ** 2
+
+# Lambda function
+square_lambda = lambda x: x ** 2
+
+print(square(5))        # 25
+print(square_lambda(5)) # 25
+
+# Lambda with multiple arguments
+add = lambda a, b: a + b
+print(add(3, 5))        # 8
+
+# Lambda functions often used with map, filter, sorted
+numbers = [1, 2, 3, 4, 5]
+
+# Map - apply function to all items
+squared = list(map(lambda x: x**2, numbers))
+print(squared)          # [1, 4, 9, 16, 25]
+
+# Filter - keep items that satisfy condition
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)            # [2, 4]
+
+# Sorted with custom key
+students = [
+    {"name": "Alice", "age": 25},
+    {"name": "Bob", "age": 20},
+    {"name": "Charlie", "age": 23}
+]
+sorted_students = sorted(students, key=lambda x: x["age"])
+print(sorted_students)
+# [{'name': 'Bob', 'age': 20}, {'name': 'Charlie', 'age': 23}, {'name': 'Alice', 'age': 25}]
+                </div>
+
+                <h3>Scope and Global Variables</h3>
+                <div class="code-block">
+# Global variable
+x = 10
+
+def my_function():
+    # Local variable
+    y = 20
+    print(f"Inside function: x={x}, y={y}")
+
+my_function()           # Inside function: x=10, y=20
+print(f"Outside: x={x}")    # Outside: x=10
+# print(y)              # Error: y is not defined
+
+# Modifying global variable
+counter = 0
+
+def increment():
+    global counter      # Declare as global to modify
+    counter += 1
+
+increment()
+increment()
+print(counter)          # 2
+
+# Nonlocal for nested functions
+def outer():
+    x = 10
+
+    def inner():
+        nonlocal x      # Refer to outer function's x
+        x = 20
+
+    inner()
+    print(x)            # 20
+
+outer()
+                </div>
+
+                <h3>Docstrings</h3>
+                <div class="code-block">
+# Function with docstring
+def calculate_area(length, width):
+    """
+    Calculate the area of a rectangle.
+
+    Parameters:
+    length (float): The length of the rectangle
+    width (float): The width of the rectangle
+
+    Returns:
+    float: The area of the rectangle
+    """
+    return length * width
+
+# Access docstring
+print(calculate_area.__doc__)
+help(calculate_area)
+                </div>
+            </section>
+
+            <section id="advanced">
+                <h2>Advanced Topics</h2>
+
+                <h3>String Slicing</h3>
+                <p>Slicing allows you to extract portions of a string using the syntax <code>[start:stop:step]</code>:</p>
+                <div class="code-block">
+text = "Python Programming"
+
+# Basic slicing
+print(text[0:6])        # Python (index 0 to 5)
+print(text[7:18])       # Programming
+print(text[:6])         # Python (start to 6)
+print(text[7:])         # Programming (7 to end)
+print(text[:])          # Python Programming (entire string)
+
+# Negative indices
+print(text[-11:])       # Programming (last 11 chars)
+print(text[:-12])       # Python (all except last 12)
+
+# Step parameter
+print(text[::2])        # Pto rgamn (every 2nd char)
+print(text[::3])        # Ph ormn (every 3rd char)
+
+# Reverse string
+print(text[::-1])       # gnimmargorP nohtyP
+
+# Practical examples
+email = "user@example.com"
+username = email[:email.index('@')]
+domain = email[email.index('@')+1:]
+print(f"Username: {username}")  # user
+print(f"Domain: {domain}")      # example.com
+                </div>
+
+                <h3>List Slicing</h3>
+                <div class="code-block">
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Basic slicing
+print(numbers[2:7])     # [2, 3, 4, 5, 6]
+print(numbers[:5])      # [0, 1, 2, 3, 4]
+print(numbers[5:])      # [5, 6, 7, 8, 9]
+
+# Step parameter
+print(numbers[::2])     # [0, 2, 4, 6, 8] (every 2nd)
+print(numbers[1::2])    # [1, 3, 5, 7, 9] (odd numbers)
+
+# Reverse list
+print(numbers[::-1])    # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+# Copy a list
+copy = numbers[:]
+print(copy)             # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Modify slice
+numbers[2:5] = [20, 30, 40]
+print(numbers)          # [0, 1, 20, 30, 40, 5, 6, 7, 8, 9]
+
+# Delete slice
+del numbers[2:5]
+print(numbers)          # [0, 1, 5, 6, 7, 8, 9]
+                </div>
+
+                <h3>List Unpacking</h3>
+                <div class="code-block">
+# Basic unpacking
+numbers = [1, 2, 3]
+a, b, c = numbers
+print(a, b, c)          # 1 2 3
+
+# Unpacking with *
+numbers = [1, 2, 3, 4, 5]
+first, *middle, last = numbers
+print(first)            # 1
+print(middle)           # [2, 3, 4]
+print(last)             # 5
+
+# Unpacking first and rest
+first, *rest = numbers
+print(first)            # 1
+print(rest)             # [2, 3, 4, 5]
+
+# Unpacking last and rest
+*rest, last = numbers
+print(rest)             # [1, 2, 3, 4]
+print(last)             # 5
+
+# Ignore values with _
+a, _, c = [1, 2, 3]
+print(a, c)             # 1 3
+
+# Unpacking in loops
+pairs = [(1, 2), (3, 4), (5, 6)]
+for x, y in pairs:
+    print(f"x={x}, y={y}")
+
+# Dictionary unpacking
+person = {"name": "Alice", "age": 25}
+name, age = person.values()
+print(name, age)        # Alice 25
+                </div>
+
+                <h3>Tuple Unpacking</h3>
+                <div class="code-block">
+# Basic tuple unpacking
+coordinates = (10, 20)
+x, y = coordinates
+print(x, y)             # 10 20
+
+# Function returning multiple values
+def get_stats():
+    return 10, 20, 30   # Returns tuple
+
+min_val, max_val, avg = get_stats()
+print(min_val, max_val, avg)  # 10 20 30
+
+# Swapping values
+a, b = 5, 10
+a, b = b, a             # Swap
+print(a, b)             # 10 5
+
+# Nested unpacking
+data = (1, (2, 3), 4)
+a, (b, c), d = data
+print(a, b, c, d)       # 1 2 3 4
+
+# Extended unpacking
+numbers = (1, 2, 3, 4, 5)
+first, *middle, last = numbers
+print(first)            # 1
+print(middle)           # [2, 3, 4]
+print(last)             # 5
+                </div>
+
+                <h3>Formatted Strings (f-strings)</h3>
+                <p>F-strings (formatted string literals) provide a concise way to embed expressions inside string literals:</p>
+                <div class="code-block">
+# Basic f-string
+name = "Alice"
+age = 25
+print(f"My name is {name} and I'm {age} years old")
+# Output: My name is Alice and I'm 25 years old
+
+# Expressions inside f-strings
+x = 10
+y = 20
+print(f"The sum of {x} and {y} is {x + y}")
+# Output: The sum of 10 and 20 is 30
+
+# Calling functions
+def square(n):
+    return n ** 2
+
+print(f"The square of 5 is {square(5)}")
+# Output: The square of 5 is 25
+
+# Formatting numbers
+pi = 3.14159265359
+print(f"Pi rounded to 2 decimals: {pi:.2f}")
+# Output: Pi rounded to 2 decimals: 3.14
+
+# Formatting with width
+num = 42
+print(f"Number: {num:5}")       # Right-aligned, width 5
+print(f"Number: {num:<5}")      # Left-aligned, width 5
+print(f"Number: {num:^5}")      # Center-aligned, width 5
+print(f"Number: {num:05}")      # Zero-padded
+
+# Percentage formatting
+score = 0.856
+print(f"Score: {score:.1%}")    # Score: 85.6%
+
+# Thousand separator
+large_num = 1000000
+print(f"Amount: {large_num:,}")  # Amount: 1,000,000
+
+# Date formatting
+from datetime import datetime
+now = datetime.now()
+print(f"Date: {now:%Y-%m-%d}")
+print(f"Time: {now:%H:%M:%S}")
+
+# Dictionary access in f-strings
+person = {"name": "Bob", "age": 30}
+print(f"Name: {person['name']}, Age: {person['age']}")
+
+# Multiline f-strings
+name = "Alice"
+age = 25
+city = "New York"
+message = f"""
+Name: {name}
+Age: {age}
+City: {city}
+"""
+print(message)
+
+# Debug feature (Python 3.8+)
+x = 10
+y = 20
+print(f"{x=}, {y=}, {x+y=}")
+# Output: x=10, y=20, x+y=30
+                </div>
+
+                <h4>String Formatting Comparison</h4>
+                <div class="code-block">
+name = "Alice"
+age = 25
+
+# Old style (% formatting)
+print("Name: %s, Age: %d" % (name, age))
+
+# str.format() method
+print("Name: {}, Age: {}".format(name, age))
+print("Name: {0}, Age: {1}".format(name, age))
+print("Name: {n}, Age: {a}".format(n=name, a=age))
+
+# f-strings (Python 3.6+) - RECOMMENDED
+print(f"Name: {name}, Age: {age}")
+                </div>
+
+                <div class="tip-box">
+                    <h4>F-String Best Practices</h4>
+                    <ul>
+                        <li>Use f-strings for most string formatting (Python 3.6+)</li>
+                        <li>They are faster and more readable than older methods</li>
+                        <li>Can include any valid Python expression</li>
+                        <li>Support the same format specifications as str.format()</li>
+                        <li>Use <code>{variable=}</code> for quick debugging</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="tip-box" style="margin-top: 50px;">
+                <h4>Next Steps in Your Python Journey</h4>
+                <ul>
+                    <li><strong>Object-Oriented Programming:</strong> Learn about classes, objects, inheritance</li>
+                    <li><strong>File Handling:</strong> Read and write files, work with CSV, JSON</li>
+                    <li><strong>Exception Handling:</strong> Try-except blocks, custom exceptions</li>
+                    <li><strong>Modules and Packages:</strong> Import and create your own modules</li>
+                    <li><strong>List Comprehensions:</strong> Advanced list creation techniques</li>
+                    <li><strong>Decorators and Generators:</strong> Advanced Python features</li>
+                    <li><strong>Libraries:</strong> NumPy, Pandas, Matplotlib for data science</li>
+                    <li><strong>Web Frameworks:</strong> Django, Flask for web development</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Python Programming Basics - Foundation for Your Coding Journey</p>
+            <p>Practice these fundamentals to build strong programming skills</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">Keep coding, keep learning!</p>
+        </footer>
+    </div>
+</body>
+</html>

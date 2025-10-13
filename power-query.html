@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Query Editor - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f5a623 0%, #f76b1c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #34495e;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            scroll-margin-top: 70px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f5a623;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #f76b1c;
+        }
+
+        h4 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .ui-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .component-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .component-card h4 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .component-card p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95em;
+            margin-bottom: 0;
+        }
+
+        .ribbon-tab {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #f5a623;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .ribbon-tab h3 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .feature-group {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-list {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        .feature-list li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .feature-list li strong {
+            color: #2c3e50;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box h4 {
+            color: #1976D2;
+            margin-top: 0;
+        }
+
+        .info-box p {
+            color: #333;
+            margin-bottom: 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .warning-box p {
+            color: #856404;
+            margin-bottom: 0;
+        }
+
+        .transformation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .transformation-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .transformation-item:hover {
+            transform: scale(1.05);
+        }
+
+        .data-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .data-type-card {
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .data-type-card h5 {
+            margin: 0 0 10px 0;
+            color: #f5a623;
+            font-size: 1.1em;
+        }
+
+        .data-type-card p {
+            margin: 0;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .best-practices {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .best-practices h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        .best-practices ul {
+            margin-left: 20px;
+            color: #155724;
+        }
+
+        .best-practices li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .shortcut-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .shortcut-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+
+        .shortcut-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .ui-components {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Power Query Editor</h1>
+            <p>Complete Guide to Data Transformation in Power BI</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#ui-components">UI Components</a></li>
+                <li><a href="#home-tab">Home Tab</a></li>
+                <li><a href="#transform-tab">Transform Tab</a></li>
+                <li><a href="#add-column-tab">Add Column Tab</a></li>
+                <li><a href="#view-tab">View Tab</a></li>
+                <li><a href="#tools-tab">Tools Tab</a></li>
+                <li><a href="#data-types">Data Types</a></li>
+                <li><a href="#advanced">Advanced Features</a></li>
+                <li><a href="#best-practices">Best Practices</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="overview">
+                <h2>What is Power Query Editor?</h2>
+                <p>Power Query Editor is a powerful data transformation and preparation tool integrated into Power BI Desktop. It provides a comprehensive environment for connecting to various data sources, shaping data, and transforming it before loading into your data model for analysis.</p>
+
+                <div class="info-box">
+                    <h4>Key Capabilities</h4>
+                    <p>Power Query Editor allows you to connect to multiple data sources, perform over 50+ transformation operations, write custom M code, and create reusable query functions. All transformations are tracked as applied steps, making your data preparation process transparent and repeatable.</p>
+                </div>
+
+                <p><strong>How to Access Power Query Editor:</strong> In Power BI Desktop, click on "Transform data" from the Home ribbon, or select "Edit Queries" to open the Power Query Editor interface.</p>
+            </section>
+
+            <section id="ui-components">
+                <h2>Power Query Editor Interface</h2>
+                <p>The Power Query Editor consists of four main components that work together to provide a comprehensive data transformation experience:</p>
+
+                <div class="ui-components">
+                    <div class="component-card">
+                        <h4>1. The Ribbon</h4>
+                        <p>Navigation experience with six main tabs (Home, Transform, Add Column, View, Tools, Help) providing access to all transformation functions and tools.</p>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>2. Queries Pane</h4>
+                        <p>Located on the left side, this pane displays all available queries in your workbook. You can organize queries into groups, rename them, and manage query dependencies.</p>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>3. Data Preview</h4>
+                        <p>The center pane displays a preview of your data with up to 1000 rows. You can switch between Data view, Schema view, and Diagram view to visualize your query structure.</p>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>4. Query Settings Pane</h4>
+                        <p>Located on the right side, showing the query name, properties, and all applied transformation steps. You can reorder, edit, or delete steps to modify your transformation logic.</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 30px;">
+                    <h4>Additional UI Elements</h4>
+                    <p><strong>Status Bar:</strong> Located at the bottom of the window, displays query execution information, row counts, and profiling statistics.</p>
+                    <p><strong>Formula Bar:</strong> Shows the M code for the currently selected step, allowing direct code editing.</p>
+                </div>
+            </section>
+
+            <section id="home-tab">
+                <h2>Home Tab - Core Operations</h2>
+                <p>The Home tab contains the most frequently used operations for query management and basic data transformations. All features on this tab affect the entire table or query.</p>
+
+                <div class="ribbon-tab">
+                    <h3>Close & Load Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Close & Load:</strong> Applies all transformations and loads the data into Power BI Desktop data model</li>
+                            <li><strong>Close & Load To:</strong> Provides options to load data to specific locations (table, connection only, or both)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>New Query Group</h3>
+                    <div class="feature-group">
+                        <h4>Data Sources Available:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Excel Workbook:</strong> Import data from Excel files (.xlsx, .xls)</li>
+                            <li><strong>Text/CSV:</strong> Import comma-separated or delimited text files</li>
+                            <li><strong>SQL Server:</strong> Connect to SQL Server databases</li>
+                            <li><strong>Web:</strong> Extract data from web pages and APIs</li>
+                            <li><strong>SharePoint:</strong> Connect to SharePoint lists and document libraries</li>
+                            <li><strong>OData Feed:</strong> Connect to OData services</li>
+                            <li><strong>Azure Services:</strong> Connect to Azure SQL Database, Azure Blob Storage, and more</li>
+                            <li><strong>Oracle, MySQL, PostgreSQL:</strong> Connect to various database systems</li>
+                            <li><strong>JSON, XML:</strong> Import structured data files</li>
+                            <li><strong>Folder:</strong> Combine multiple files from a folder</li>
+                            <li><strong>Blank Query:</strong> Start with an empty query to write custom M code</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Recent Sources:</strong> Quick access to your recently used data connections</p>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Query Management Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Refresh Preview:</strong> Updates the data preview for the current query</li>
+                            <li><strong>Properties:</strong> Edit query name, description, and load settings</li>
+                            <li><strong>Advanced Editor:</strong> View and edit the complete M code for your query</li>
+                            <li><strong>Manage Queries:</strong> Delete, duplicate, or reference the current query</li>
+                            <li><strong>Delete:</strong> Remove the selected query from your workbook</li>
+                            <li><strong>Duplicate:</strong> Create an exact copy of the query</li>
+                            <li><strong>Reference:</strong> Create a new query that references the current one</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Reduce Rows Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Keep Rows:</strong> Keep top rows, bottom rows, range of rows, or duplicates</li>
+                            <li><strong>Remove Rows:</strong> Remove top rows, bottom rows, alternate rows, duplicates, or errors</li>
+                            <li><strong>Remove Duplicates:</strong> Keeps only unique rows based on all columns</li>
+                            <li><strong>Remove Errors:</strong> Removes rows containing errors in any column</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Manage Columns Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Choose Columns:</strong> Select specific columns to keep in your table</li>
+                            <li><strong>Remove Columns:</strong> Delete selected columns from the table</li>
+                            <li><strong>Remove Other Columns:</strong> Keep only the selected columns and remove all others</li>
+                            <li><strong>Go To Column:</strong> Navigate to a specific column by name</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Transform Group (Basic)</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Data Type:</strong> Change the data type of selected columns</li>
+                            <li><strong>Use First Row as Headers:</strong> Promote the first row to column headers</li>
+                            <li><strong>Detect Data Type:</strong> Automatically detect and apply appropriate data types</li>
+                            <li><strong>Replace Values:</strong> Find and replace specific values in selected columns</li>
+                            <li><strong>Replace Errors:</strong> Replace error values with a specified value</li>
+                            <li><strong>Fill:</strong> Fill down or fill up to propagate values</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Combine Queries Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Merge Queries:</strong> Combine two tables based on matching columns (similar to SQL JOIN)</li>
+                            <li><strong>Merge Queries as New:</strong> Create a new query from the merge operation</li>
+                            <li><strong>Append Queries:</strong> Stack tables vertically (similar to SQL UNION)</li>
+                            <li><strong>Append Queries as New:</strong> Create a new query from the append operation</li>
+                        </ul>
+                        <div class="info-box" style="margin-top: 15px;">
+                            <h4>Merge Join Types Available</h4>
+                            <p>Left Outer, Right Outer, Full Outer, Inner, Left Anti, Right Anti</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Structured Column Group</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Expand:</strong> Expand nested tables, records, or lists into separate columns</li>
+                            <li><strong>Aggregate:</strong> Perform aggregations on nested tables (Sum, Count, Average, etc.)</li>
+                            <li><strong>Extract Values:</strong> Extract values from lists into text format</li>
+                        </ul>
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <h4>Note</h4>
+                            <p>These options are only active when you select columns containing nested structures (Table, List, or Record types). Regular data type columns will show these options as grayed out.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transform-tab">
+                <h2>Transform Tab - Data Shaping Operations</h2>
+                <p>The Transform tab provides advanced data transformation capabilities. A key difference from the Add Column tab: transformations here modify existing columns rather than creating new ones.</p>
+
+                <div class="ribbon-tab">
+                    <h3>Table Operations</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Group By:</strong> Aggregate data by grouping rows with common values
+                                <ul style="margin-top: 8px; margin-left: 20px;">
+                                    <li>Available aggregations: Sum, Average, Count, Count Distinct, Min, Max, Median, Standard Deviation, All Rows</li>
+                                </ul>
+                            </li>
+                            <li><strong>Transpose:</strong> Convert rows to columns and columns to rows</li>
+                            <li><strong>Reverse Rows:</strong> Reverse the order of all rows in the table</li>
+                            <li><strong>Count Rows:</strong> Returns the total number of rows as a single value</li>
+                            <li><strong>Use First Row as Headers:</strong> Promote the first data row to become column headers</li>
+                            <li><strong>Use Headers as First Row:</strong> Demote column headers to become the first data row</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Column Operations</h3>
+                    <div class="feature-group">
+                        <h4>Pivot and Unpivot:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Pivot Column:</strong> Transform row values into column headers (wide format)</li>
+                            <li><strong>Unpivot Columns:</strong> Transform column headers into row values (long format)</li>
+                            <li><strong>Unpivot Other Columns:</strong> Unpivot all columns except the selected ones</li>
+                            <li><strong>Unpivot Only Selected Columns:</strong> Unpivot only the columns you select</li>
+                        </ul>
+
+                        <h4>Data Type Conversions:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Data Type:</strong> Change to Text, Number, Date, Date/Time, Time, Duration, etc.</li>
+                            <li><strong>Detect Data Type:</strong> Automatically detect the best data type for each column</li>
+                            <li><strong>To Lowercase / Uppercase / Capitalize Each Word:</strong> Text case transformations</li>
+                        </ul>
+
+                        <h4>Move and Rename:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Move:</strong> Reposition columns (Left, Right, To Beginning, To End)</li>
+                            <li><strong>Rename:</strong> Change the column name</li>
+                            <li><strong>Rename with List:</strong> Rename multiple columns using a list</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Text Column Transformations</h3>
+                    <div class="transformation-grid">
+                        <div class="transformation-item">Format - Lowercase</div>
+                        <div class="transformation-item">Format - UPPERCASE</div>
+                        <div class="transformation-item">Format - Capitalize Each Word</div>
+                        <div class="transformation-item">Trim - Remove leading/trailing spaces</div>
+                        <div class="transformation-item">Clean - Remove non-printable characters</div>
+                        <div class="transformation-item">Add Prefix</div>
+                        <div class="transformation-item">Add Suffix</div>
+                        <div class="transformation-item">Split Column - By Delimiter</div>
+                        <div class="transformation-item">Split Column - By Number of Characters</div>
+                        <div class="transformation-item">Split Column - By Positions</div>
+                        <div class="transformation-item">Extract - Length</div>
+                        <div class="transformation-item">Extract - First Characters</div>
+                        <div class="transformation-item">Extract - Last Characters</div>
+                        <div class="transformation-item">Extract - Range</div>
+                        <div class="transformation-item">Extract - Text Before Delimiter</div>
+                        <div class="transformation-item">Extract - Text After Delimiter</div>
+                        <div class="transformation-item">Extract - Text Between Delimiters</div>
+                        <div class="transformation-item">Parse - JSON</div>
+                        <div class="transformation-item">Parse - XML</div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Number Column Transformations</h3>
+                    <div class="transformation-grid">
+                        <div class="transformation-item">Statistics - Sum</div>
+                        <div class="transformation-item">Statistics - Minimum</div>
+                        <div class="transformation-item">Statistics - Maximum</div>
+                        <div class="transformation-item">Statistics - Average</div>
+                        <div class="transformation-item">Statistics - Median</div>
+                        <div class="transformation-item">Statistics - Standard Deviation</div>
+                        <div class="transformation-item">Statistics - Count Values</div>
+                        <div class="transformation-item">Standard - Add</div>
+                        <div class="transformation-item">Standard - Multiply</div>
+                        <div class="transformation-item">Standard - Subtract</div>
+                        <div class="transformation-item">Standard - Divide</div>
+                        <div class="transformation-item">Standard - Integer-Divide</div>
+                        <div class="transformation-item">Standard - Modulo</div>
+                        <div class="transformation-item">Scientific - Absolute Value</div>
+                        <div class="transformation-item">Scientific - Power</div>
+                        <div class="transformation-item">Scientific - Square Root</div>
+                        <div class="transformation-item">Scientific - Factorial</div>
+                        <div class="transformation-item">Rounding - Round</div>
+                        <div class="transformation-item">Rounding - Round Up</div>
+                        <div class="transformation-item">Rounding - Round Down</div>
+                        <div class="transformation-item">Trigonometry - Sine, Cosine, Tangent</div>
+                        <div class="transformation-item">Information - Is Even / Is Odd</div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Date/Time Column Transformations</h3>
+                    <div class="feature-group">
+                        <h4>Date Extractions:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Year:</strong> Extract the year as a number</li>
+                            <li><strong>Month:</strong> Extract month as number or name</li>
+                            <li><strong>Day:</strong> Extract the day of the month</li>
+                            <li><strong>Day of Week:</strong> Extract weekday as number or name</li>
+                            <li><strong>Day of Year:</strong> Extract the day number within the year</li>
+                            <li><strong>Quarter:</strong> Extract the quarter (1-4)</li>
+                            <li><strong>Week of Month:</strong> Extract the week number within the month</li>
+                            <li><strong>Week of Year:</strong> Extract the week number within the year</li>
+                            <li><strong>Start of Week / Month / Quarter / Year:</strong> Get the first day of the period</li>
+                            <li><strong>End of Week / Month / Quarter / Year:</strong> Get the last day of the period</li>
+                        </ul>
+
+                        <h4>Time Extractions:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Hour:</strong> Extract the hour component</li>
+                            <li><strong>Minute:</strong> Extract the minute component</li>
+                            <li><strong>Second:</strong> Extract the second component</li>
+                            <li><strong>Time Only:</strong> Extract just the time portion from DateTime</li>
+                            <li><strong>Date Only:</strong> Extract just the date portion from DateTime</li>
+                        </ul>
+
+                        <h4>Date/Time Calculations:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Age:</strong> Calculate the duration from a date to today</li>
+                            <li><strong>Subtract Days / Months / Years:</strong> Calculate past dates</li>
+                            <li><strong>Add Days / Months / Years:</strong> Calculate future dates</li>
+                            <li><strong>Earliest / Latest:</strong> Find min or max date values</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Any Column Transformations</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Replace Values:</strong> Find and replace specific values</li>
+                            <li><strong>Replace Errors:</strong> Replace error values with a default value</li>
+                            <li><strong>Fill:</strong> Fill Down or Fill Up to propagate values to empty cells</li>
+                            <li><strong>Convert to List:</strong> Convert the selected column into a List type</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="add-column-tab">
+                <h2>Add Column Tab - Creating New Columns</h2>
+                <p>The Add Column tab provides tools for creating new columns while preserving existing ones. This is the key difference from the Transform tab.</p>
+
+                <div class="ribbon-tab">
+                    <h3>General Column Creation</h3>
+                    <div class="feature-group">
+                        <h4>Custom Column:</h4>
+                        <p>Create a new column using Power Query M formula language. Provides a dialog with:</p>
+                        <ul class="feature-list">
+                            <li>New column name input field</li>
+                            <li>Data type selection dropdown</li>
+                            <li>Custom column formula editor with syntax highlighting</li>
+                            <li>Available columns list for easy reference</li>
+                            <li>Formula validation and error checking</li>
+                        </ul>
+
+                        <div class="code-block" style="margin-top: 15px;">
+Example Custom Column Formula:
+if [Sales] > 10000 then "High"
+else if [Sales] > 5000 then "Medium"
+else "Low"
+                        </div>
+
+                        <h4>Conditional Column:</h4>
+                        <p>Create IF-THEN-ELSE logic without writing code. The dialog provides:</p>
+                        <ul class="feature-list">
+                            <li><strong>New column name:</strong> Define the name of your new column</li>
+                            <li><strong>Column selection:</strong> Choose the column to evaluate</li>
+                            <li><strong>Operator selection:</strong> Equals, Not equals, Greater than, Less than, Greater than or equal to, Less than or equal to, Begins with, Ends with, Contains, Does not contain</li>
+                            <li><strong>Value input:</strong> Enter the value to compare against</li>
+                            <li><strong>Output value:</strong> Define what to return if condition is true</li>
+                            <li><strong>Add clause:</strong> Add multiple conditional clauses</li>
+                            <li><strong>Else clause:</strong> Define default output if no conditions match</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <h4>Important Note</h4>
+                            <p>Conditional clauses are evaluated in order from top to bottom. The first condition that evaluates to true will return its output, and subsequent clauses will not be evaluated.</p>
+                        </div>
+
+                        <h4>Index Column:</h4>
+                        <ul class="feature-list">
+                            <li><strong>From 1:</strong> Create an index starting at 1</li>
+                            <li><strong>From 0:</strong> Create an index starting at 0</li>
+                            <li><strong>Custom:</strong> Define your own starting value and increment</li>
+                        </ul>
+
+                        <h4>Duplicate Column:</h4>
+                        <p>Create an exact copy of the selected column with a new name</p>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>From Text Columns</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Format:</strong> Add new columns with formatted versions (Lowercase, UPPERCASE, Capitalize Each Word)</li>
+                            <li><strong>Trim:</strong> Create a new column with trimmed text</li>
+                            <li><strong>Clean:</strong> Create a new column with cleaned text (non-printable characters removed)</li>
+                            <li><strong>Length:</strong> Add a column showing the length of text</li>
+                            <li><strong>Parse:</strong> Parse JSON or XML into structured columns</li>
+                            <li><strong>Extract:</strong> Extract First Characters, Last Characters, Range, Text Before/After/Between Delimiters</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>From Number Columns</h3>
+                    <div class="feature-group">
+                        <h4>Standard Math Operations:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Add:</strong> Add a constant value to numbers</li>
+                            <li><strong>Multiply:</strong> Multiply numbers by a constant</li>
+                            <li><strong>Subtract:</strong> Subtract a constant from numbers</li>
+                            <li><strong>Divide:</strong> Divide numbers by a constant</li>
+                            <li><strong>Integer-Divide:</strong> Perform integer division</li>
+                            <li><strong>Modulo:</strong> Get the remainder after division</li>
+                            <li><strong>Percentage:</strong> Convert to percentage</li>
+                            <li><strong>Percentage Of:</strong> Calculate as percentage of total</li>
+                        </ul>
+
+                        <h4>Scientific Operations:</h4>
+                        <div class="transformation-grid">
+                            <div class="transformation-item">Absolute Value</div>
+                            <div class="transformation-item">Power</div>
+                            <div class="transformation-item">Square Root</div>
+                            <div class="transformation-item">Exponent</div>
+                            <div class="transformation-item">Logarithm (Base 10)</div>
+                            <div class="transformation-item">Natural Logarithm</div>
+                            <div class="transformation-item">Factorial</div>
+                        </div>
+
+                        <h4>Rounding Operations:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Round:</strong> Round to specified decimal places</li>
+                            <li><strong>Round Up:</strong> Always round up (ceiling)</li>
+                            <li><strong>Round Down:</strong> Always round down (floor)</li>
+                        </ul>
+
+                        <h4>Trigonometric Functions:</h4>
+                        <div class="transformation-grid">
+                            <div class="transformation-item">Sine</div>
+                            <div class="transformation-item">Cosine</div>
+                            <div class="transformation-item">Tangent</div>
+                            <div class="transformation-item">Arcsine</div>
+                            <div class="transformation-item">Arccosine</div>
+                            <div class="transformation-item">Arctangent</div>
+                        </div>
+
+                        <h4>Information Functions:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Is Even:</strong> Returns true/false if number is even</li>
+                            <li><strong>Is Odd:</strong> Returns true/false if number is odd</li>
+                            <li><strong>Sign:</strong> Returns -1, 0, or 1 based on number's sign</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>From Date/Time Columns</h3>
+                    <div class="feature-group">
+                        <h4>Date Component Extraction:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Year:</strong> Extract year as a number</li>
+                            <li><strong>Month:</strong> Extract month (number or name)</li>
+                            <li><strong>Day:</strong> Extract day of month</li>
+                            <li><strong>Day of Week:</strong> Extract weekday (number or name)</li>
+                            <li><strong>Day of Year:</strong> Extract day number (1-365/366)</li>
+                            <li><strong>Quarter:</strong> Extract quarter (1-4)</li>
+                            <li><strong>Week of Month:</strong> Extract week within month</li>
+                            <li><strong>Week of Year:</strong> Extract week within year (1-52/53)</li>
+                        </ul>
+
+                        <h4>Time Component Extraction:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Hour:</strong> Extract hour (0-23)</li>
+                            <li><strong>Minute:</strong> Extract minute (0-59)</li>
+                            <li><strong>Second:</strong> Extract second (0-59)</li>
+                        </ul>
+
+                        <h4>Date Calculations:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Age:</strong> Calculate duration from date to today</li>
+                            <li><strong>Date Only:</strong> Extract only the date portion</li>
+                            <li><strong>Time Only:</strong> Extract only the time portion</li>
+                            <li><strong>Start of Year / Quarter / Month / Week / Day / Hour / Minute:</strong> Get the beginning of period</li>
+                            <li><strong>End of Year / Quarter / Month / Week / Day / Hour / Minute:</strong> Get the end of period</li>
+                            <li><strong>Days Until Today:</strong> Calculate days from date to today</li>
+                            <li><strong>Days Until End of Month / Quarter / Year:</strong> Calculate remaining days in period</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Statistics Column</h3>
+                    <div class="feature-group">
+                        <p>Perform statistical calculations across numeric columns:</p>
+                        <ul class="feature-list">
+                            <li><strong>Sum:</strong> Calculate the sum of values</li>
+                            <li><strong>Minimum:</strong> Find the minimum value</li>
+                            <li><strong>Maximum:</strong> Find the maximum value</li>
+                            <li><strong>Average:</strong> Calculate the mean</li>
+                            <li><strong>Median:</strong> Calculate the median value</li>
+                            <li><strong>Standard Deviation:</strong> Calculate standard deviation</li>
+                            <li><strong>Count Values:</strong> Count non-null values</li>
+                            <li><strong>Count Distinct Values:</strong> Count unique values</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-tab">
+                <h2>View Tab - Display and Layout Options</h2>
+                <p>The View tab controls the visual layout of the Power Query Editor and provides access to advanced editing tools.</p>
+
+                <div class="ribbon-tab">
+                    <h3>Layout Options</h3>
+                    <div class="feature-group">
+                        <h4>Pane Visibility:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Queries Pane:</strong> Toggle the left pane showing all queries</li>
+                            <li><strong>Query Settings:</strong> Toggle the right pane showing applied steps</li>
+                            <li><strong>Formula Bar:</strong> Toggle the formula bar showing M code for current step</li>
+                        </ul>
+
+                        <h4>View Modes:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Data Preview (Default):</strong> Shows tabular view of your data</li>
+                            <li><strong>Schema View:</strong> Displays the schema with column names, data types, and column statistics</li>
+                            <li><strong>Diagram View:</strong> Visual representation of query dependencies and relationships</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Data Preview Options</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Column Quality:</strong> Shows a bar chart indicating percentage of Valid, Error, and Empty values</li>
+                            <li><strong>Column Distribution:</strong> Displays a histogram showing value distribution and count of distinct/unique values</li>
+                            <li><strong>Column Profile:</strong> Provides detailed statistics for the selected column (count, errors, distinct, unique, min, max, even, odd, etc.)</li>
+                            <li><strong>Monospaced Font:</strong> Toggle between proportional and monospaced font for data preview</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <h4>Profiling Data Sample</h4>
+                            <p>By default, profiling is based on the first 1000 rows. You can change this to profile based on the entire dataset in the status bar at the bottom of the window.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Advanced Editing</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Advanced Editor:</strong> Opens a code editor showing the complete M code for your query</li>
+                            <li><strong>Query Dependencies:</strong> Shows a visual map of how queries reference each other</li>
+                        </ul>
+
+                        <div class="code-block" style="margin-top: 15px;">
+Example M Code in Advanced Editor:
+let
+    Source = Excel.Workbook(File.Contents("C:\Data\Sales.xlsx")),
+    Sheet1 = Source{[Name="Sheet1"]}[Data],
+    PromotedHeaders = Table.PromoteHeaders(Sheet1),
+    ChangedType = Table.TransformColumnTypes(PromotedHeaders,
+        {{"Date", type date}, {"Sales", type number}})
+in
+    ChangedType
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Zoom</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Zoom In:</strong> Increase the size of data preview</li>
+                            <li><strong>Zoom Out:</strong> Decrease the size of data preview</li>
+                            <li><strong>Zoom to Fit:</strong> Adjust zoom to fit the window</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tools-tab">
+                <h2>Tools Tab - Diagnostics and Analysis</h2>
+                <p>The Tools tab provides query diagnostics, profiling options, and tools for analyzing query performance and behavior.</p>
+
+                <div class="ribbon-tab">
+                    <h3>Query Diagnostics</h3>
+                    <div class="feature-group">
+                        <p>Query Diagnostics help you understand what the Power Query engine is doing behind the scenes, including:</p>
+                        <ul class="feature-list">
+                            <li><strong>Start Diagnostics:</strong> Begin recording diagnostic information</li>
+                            <li><strong>Stop Diagnostics:</strong> Stop recording and generate diagnostic report</li>
+                            <li><strong>Diagnose Step:</strong> Analyze performance of a specific transformation step</li>
+                        </ul>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <h4>What Diagnostics Capture</h4>
+                            <p>Diagnostics capture query execution time, data source queries (SQL, API calls), query folding behavior, and resource consumption. The results are returned as new queries in your workbook showing detailed performance metrics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Data Profiling Tools</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Column Quality:</strong> Enable/disable column quality indicators</li>
+                            <li><strong>Column Distribution:</strong> Enable/disable distribution histograms</li>
+                            <li><strong>Column Profile:</strong> Enable/disable detailed column statistics</li>
+                            <li><strong>Data Profiling Scope:</strong> Choose between "First 1000 rows" or "Entire dataset"</li>
+                        </ul>
+
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <h4>Performance Consideration</h4>
+                            <p>Profiling the entire dataset can impact performance, especially with large data sources. Use "First 1000 rows" for faster preview during development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>AI Insights</h3>
+                    <div class="feature-group">
+                        <ul class="feature-list">
+                            <li><strong>Text Analytics:</strong> Analyze text for language detection, key phrase extraction, and sentiment analysis</li>
+                            <li><strong>Vision:</strong> Tag images, extract text from images (OCR)</li>
+                            <li><strong>Azure Machine Learning:</strong> Integrate with Azure ML models</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><em>Note: AI Insights require Azure Cognitive Services or Azure Machine Learning connections.</em></p>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Always Allowed Data Sources</h3>
+                    <div class="feature-group">
+                        <p>Manage which data sources are always allowed to refresh without security prompts. This is useful in enterprise environments with trusted data sources.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="data-types">
+                <h2>Data Types in Power Query</h2>
+                <p>Understanding data types is crucial for proper data transformations and optimal performance. Power Query supports the following data types:</p>
+
+                <div class="data-type-grid">
+                    <div class="data-type-card">
+                        <h5>Text</h5>
+                        <p>String values (ABC, Abc123)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>True/False</h5>
+                        <p>Boolean values (true, false)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Decimal Number</h5>
+                        <p>64-bit floating point (1.23, -45.67)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Fixed Decimal Number</h5>
+                        <p>Currency with 4 decimal places</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Whole Number</h5>
+                        <p>64-bit integer (1, 2, 3, -5)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Percentage</h5>
+                        <p>Decimal displayed as percentage</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Date/Time</h5>
+                        <p>Date and time (1/1/2024 3:45 PM)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Date</h5>
+                        <p>Date only (1/1/2024)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Time</h5>
+                        <p>Time only (3:45:00 PM)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Date/Time/Timezone</h5>
+                        <p>Date and time with timezone info</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Duration</h5>
+                        <p>Time duration (5 days 3:45:00)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Binary</h5>
+                        <p>Binary data (files, images)</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Any</h5>
+                        <p>Mixed or unknown type</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Table</h5>
+                        <p>Nested table structure</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>List</h5>
+                        <p>List of values</p>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h5>Record</h5>
+                        <p>Record with name-value pairs</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 30px;">
+                    <h4>Why Data Types Matter</h4>
+                    <p><strong>Performance:</strong> Correct data types enable query folding and faster processing</p>
+                    <p><strong>Accuracy:</strong> Prevent calculation errors and ensure proper sorting</p>
+                    <p><strong>Functionality:</strong> Many transformations are only available for specific data types</p>
+                    <p><strong>Storage:</strong> Optimal data types reduce memory usage and file size</p>
+                </div>
+            </section>
+
+            <section id="advanced">
+                <h2>Advanced Features</h2>
+
+                <div class="ribbon-tab">
+                    <h3>M Formula Language</h3>
+                    <div class="feature-group">
+                        <p>Power Query uses the M language (also known as Power Query Formula Language) for all transformations. While the UI generates M code automatically, you can write custom M code for advanced scenarios.</p>
+
+                        <h4>Key M Language Concepts:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Let-In Expressions:</strong> Standard structure for queries</li>
+                            <li><strong>Step References:</strong> Reference previous steps using their names</li>
+                            <li><strong>Functions:</strong> Create reusable custom functions</li>
+                            <li><strong>Parameters:</strong> Make queries dynamic with parameters</li>
+                            <li><strong>Error Handling:</strong> Use try...otherwise for robust queries</li>
+                        </ul>
+
+                        <div class="code-block" style="margin-top: 15px;">
+Example M Function:
+let
+    GetCategory = (salesAmount as number) as text =>
+        if salesAmount > 10000 then "Premium"
+        else if salesAmount > 5000 then "Standard"
+        else "Basic",
+
+    AddCategory = Table.AddColumn(
+        PreviousStep,
+        "Category",
+        each GetCategory([Sales Amount])
+    )
+in
+    AddCategory
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Query Folding</h3>
+                    <div class="feature-group">
+                        <p>Query folding is one of the most important performance optimization features in Power Query. It pushes transformation logic back to the source database rather than processing data in Power Query.</p>
+
+                        <h4>Benefits of Query Folding:</h4>
+                        <ul class="feature-list">
+                            <li>Dramatically faster performance</li>
+                            <li>Reduced memory consumption</li>
+                            <li>Leverages source system's processing power</li>
+                            <li>Reduces network data transfer</li>
+                        </ul>
+
+                        <h4>How to Check Query Folding:</h4>
+                        <p>Right-click on a step in Applied Steps and look for "View Native Query". If available, that step folds back to the source.</p>
+
+                        <h4>Operations That Support Folding:</h4>
+                        <div class="transformation-grid" style="margin-top: 15px;">
+                            <div class="transformation-item">Filter Rows</div>
+                            <div class="transformation-item">Remove Columns</div>
+                            <div class="transformation-item">Rename Columns</div>
+                            <div class="transformation-item">Select Columns</div>
+                            <div class="transformation-item">Change Data Types</div>
+                            <div class="transformation-item">Group By</div>
+                            <div class="transformation-item">Merge Queries (Joins)</div>
+                            <div class="transformation-item">Append Queries (Union)</div>
+                            <div class="transformation-item">Sort</div>
+                            <div class="transformation-item">Basic Calculations</div>
+                        </div>
+
+                        <h4>Operations That Break Folding:</h4>
+                        <ul class="feature-list">
+                            <li>Adding custom columns with complex M functions</li>
+                            <li>Text operations (split, extract, etc.)</li>
+                            <li>Advanced transformations not supported by the source</li>
+                            <li>Merging with non-foldable queries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Parameters</h3>
+                    <div class="feature-group">
+                        <p>Parameters make queries dynamic by allowing values to be changed without editing the query code. Common uses include:</p>
+                        <ul class="feature-list">
+                            <li><strong>File Paths:</strong> Change source file locations</li>
+                            <li><strong>Date Ranges:</strong> Dynamic date filtering</li>
+                            <li><strong>Threshold Values:</strong> Adjustable business rules</li>
+                            <li><strong>Server Names:</strong> Switch between environments</li>
+                        </ul>
+
+                        <h4>Creating Parameters:</h4>
+                        <p>Home Tab → Manage Parameters → New Parameter</p>
+                        <p>Define name, type, suggested values, default value, and current value.</p>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Custom Functions</h3>
+                    <div class="feature-group">
+                        <p>Create reusable functions to apply the same transformation logic across multiple queries or columns.</p>
+
+                        <h4>Creating a Custom Function:</h4>
+                        <ol style="margin-left: 25px; color: #555; line-height: 1.8;">
+                            <li>Create a query with sample data</li>
+                            <li>Apply desired transformations</li>
+                            <li>Right-click the query and select "Create Function"</li>
+                            <li>Define function parameters</li>
+                            <li>Use the function by invoking it on tables or values</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Handling Nested Structures</h3>
+                    <div class="feature-group">
+                        <p>Power Query can work with complex nested data structures from JSON, XML, and other sources.</p>
+
+                        <h4>Working with Tables:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Expand:</strong> Convert nested table into columns</li>
+                            <li><strong>Aggregate:</strong> Perform calculations on nested data</li>
+                        </ul>
+
+                        <h4>Working with Lists:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Extract Values:</strong> Convert list to delimited text</li>
+                            <li><strong>Expand to New Rows:</strong> Create a row for each list item</li>
+                            <li><strong>Aggregate:</strong> Count, sum, min, max on list values</li>
+                        </ul>
+
+                        <h4>Working with Records:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Expand Record:</strong> Convert record fields into columns</li>
+                            <li><strong>Extract Values:</strong> Get specific field values</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Error Handling</h3>
+                    <div class="feature-group">
+                        <p>Proper error handling ensures robust queries that don't fail when encountering unexpected data.</p>
+
+                        <h4>Error Handling Techniques:</h4>
+                        <ul class="feature-list">
+                            <li><strong>Remove Errors:</strong> Filter out rows with errors</li>
+                            <li><strong>Replace Errors:</strong> Replace error values with defaults</li>
+                            <li><strong>Keep Errors:</strong> Isolate error rows for investigation</li>
+                            <li><strong>Try...Otherwise:</strong> M code for conditional error handling</li>
+                        </ul>
+
+                        <div class="code-block" style="margin-top: 15px;">
+Example Error Handling:
+= try Number.From([Value]) otherwise 0
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-tab">
+                    <h3>Combining Files from Folder</h3>
+                    <div class="feature-group">
+                        <p>A powerful feature for combining multiple files with the same structure into a single table.</p>
+
+                        <h4>How It Works:</h4>
+                        <ol style="margin-left: 25px; color: #555; line-height: 1.8;">
+                            <li>Connect to a folder containing files</li>
+                            <li>Power Query detects file types</li>
+                            <li>Click "Combine Files" button</li>
+                            <li>Define how to read the sample file</li>
+                            <li>Power Query creates a function and applies it to all files</li>
+                        </ol>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <h4>Supported File Types</h4>
+                            <p>Excel workbooks, CSV files, JSON files, XML files, Text files, and more. All files must have the same structure.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Best Practices</h2>
+
+                <div class="best-practices">
+                    <h4>Performance Optimization</h4>
+                    <ul>
+                        <li><strong>Enable Query Folding:</strong> Perform transformations that fold back to the source</li>
+                        <li><strong>Filter Early:</strong> Remove unnecessary rows as early as possible</li>
+                        <li><strong>Remove Columns:</strong> Keep only columns you need</li>
+                        <li><strong>Avoid Custom Columns with Complex Logic:</strong> They can break query folding</li>
+                        <li><strong>Use Native Functions:</strong> Prefer built-in functions over custom M code</li>
+                        <li><strong>Disable Load for Intermediate Queries:</strong> Don't load helper queries to the model</li>
+                        <li><strong>Profile on Sample Data:</strong> Use "First 1000 rows" for profiling during development</li>
+                    </ul>
+                </div>
+
+                <div class="best-practices">
+                    <h4>Query Organization</h4>
+                    <ul>
+                        <li><strong>Use Descriptive Names:</strong> Name queries clearly (e.g., "Sales_Cleaned" not "Query1")</li>
+                        <li><strong>Create Query Groups:</strong> Organize related queries into folders</li>
+                        <li><strong>Document Your Queries:</strong> Add descriptions in Query Properties</li>
+                        <li><strong>Use Query Dependencies:</strong> Reference queries instead of duplicating logic</li>
+                        <li><strong>Separate Staging and Final:</strong> Create staging queries for transformations, final queries for loading</li>
+                    </ul>
+                </div>
+
+                <div class="best-practices">
+                    <h4>Data Quality</h4>
+                    <ul>
+                        <li><strong>Set Correct Data Types:</strong> Always define appropriate data types early</li>
+                        <li><strong>Handle Errors:</strong> Don't ignore errors; replace or remove them intentionally</li>
+                        <li><strong>Validate Data:</strong> Use column quality and distribution to spot issues</li>
+                        <li><strong>Trim Text:</strong> Remove extra spaces from text columns</li>
+                        <li><strong>Standardize Formats:</strong> Use consistent date, number, and text formats</li>
+                    </ul>
+                </div>
+
+                <div class="best-practices">
+                    <h4>Maintainability</h4>
+                    <ul>
+                        <li><strong>Use Parameters:</strong> Make queries flexible with parameters instead of hardcoded values</li>
+                        <li><strong>Create Functions:</strong> Reuse logic across queries with custom functions</li>
+                        <li><strong>Comment M Code:</strong> Add comments in Advanced Editor for complex logic</li>
+                        <li><strong>Test Incrementally:</strong> Build queries step by step, testing each transformation</li>
+                        <li><strong>Version Control:</strong> Save backup copies before major changes</li>
+                    </ul>
+                </div>
+
+                <div class="best-practices">
+                    <h4>Security</h4>
+                    <ul>
+                        <li><strong>Use Data Source Settings:</strong> Manage credentials properly</li>
+                        <li><strong>Privacy Levels:</strong> Set appropriate privacy levels for data sources</li>
+                        <li><strong>Avoid Hardcoded Credentials:</strong> Never embed passwords in queries</li>
+                        <li><strong>Review Data Sources:</strong> Regularly audit data source connections</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 40px;">Common Keyboard Shortcuts</h3>
+                <table class="shortcut-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Open Advanced Editor</td>
+                            <td>Alt + V, E</td>
+                        </tr>
+                        <tr>
+                            <td>Refresh Preview</td>
+                            <td>Ctrl + R</td>
+                        </tr>
+                        <tr>
+                            <td>Close & Load</td>
+                            <td>Alt + H, C</td>
+                        </tr>
+                        <tr>
+                            <td>Go To Column</td>
+                            <td>Ctrl + G</td>
+                        </tr>
+                        <tr>
+                            <td>Remove Columns</td>
+                            <td>Alt + H, R, C</td>
+                        </tr>
+                        <tr>
+                            <td>Filter Menu</td>
+                            <td>Click column header dropdown</td>
+                        </tr>
+                        <tr>
+                            <td>Add Custom Column</td>
+                            <td>Alt + A, C</td>
+                        </tr>
+                        <tr>
+                            <td>Add Conditional Column</td>
+                            <td>Alt + A, D</td>
+                        </tr>
+                        <tr>
+                            <td>Group By</td>
+                            <td>Alt + H, G</td>
+                        </tr>
+                        <tr>
+                            <td>Merge Queries</td>
+                            <td>Alt + H, M</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px;">Power Query Learning Resources</h3>
+                <div class="info-box">
+                    <h4>Official Documentation</h4>
+                    <p><strong>Microsoft Learn:</strong> Comprehensive Power Query documentation and tutorials</p>
+                    <p><strong>Power Query Formula Reference:</strong> Complete M language function reference</p>
+                    <p><strong>Community Forums:</strong> Power BI Community for questions and answers</p>
+                    <p><strong>Sample Queries:</strong> Microsoft provides sample datasets and queries for learning</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>Power Query Editor - The Foundation of Data Transformation in Power BI</p>
+            <p>Master these tools to build robust, efficient, and maintainable data pipelines</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">This guide covers Power Query Editor features as of 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
